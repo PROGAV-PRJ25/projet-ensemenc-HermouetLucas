@@ -1,4 +1,4 @@
-public abstract class Plante{
+public class Plante{
     protected  string nom;
     protected string espece
     protected bool comestible; 
@@ -7,9 +7,12 @@ public abstract class Plante{
     protected string terrainPref;
     protected int espacement;
     protected float vitesseCroissance;
-    protected float besoinEau; 
+    protected float besoinEau;
+     protected float zoneEau;
     protected float besoinLumi;
+    protected float zoneLumi;
     protected float besoinNutritif;
+    protected float zoneNutritif;
     protected float besoinTemp;
     protected float zoneTemp;
     protected List<(Maladie, double)>  maladies;
