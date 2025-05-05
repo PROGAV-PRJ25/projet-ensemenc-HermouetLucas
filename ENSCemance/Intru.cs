@@ -1,6 +1,7 @@
-public class Intru{
+public class Intru
+{
     public float probabiliteDApparantre;
     public string nom;
 
-    public void Effet(){}
+    public void Effet() { }
 }

@@ -1,8 +1,9 @@
-public class Plante{
-    private  string nom;
+public class Plante
+{
+    private string nom;
     private string espece;
-    private bool comestible; 
-    private  bool mauvaiseHerbe;
+    private bool comestible;
+    private bool mauvaiseHerbe;
     private string saisonSemis;
     private string terrainPref;
     private int espacement;
@@ -23,7 +24,7 @@ public class Plante{
     private int CompteurDecomposition;
     private bool estEnvahissante;
     private int etapeDeVie;
-    private List<(int,int,int)> OrientationTaillepousse;  //Faire x*t puis y*t
+    private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private bool estMalade;
     //private List<Maladie> maladie;
 
