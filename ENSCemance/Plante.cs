@@ -26,7 +26,43 @@ public class Plante
     private int etapeDeVie;
     private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private bool estMalade;
+
+    private bool aRamasse=false;
+    private bool estRecolte = false;
     //private List<Maladie> maladie;
+
+    public Plante(string Nom){
+        nom = Nom;
+        var (
+            Espece, Comestible, MauvaiseHerbe, Saison, TerrainPref, Espacement, VitesseCroissance, BesoinEau, ZoneEau, BesoinLumi,
+            ZoneLumi, BesoinNutritif, ZoneNutritif, BesoinTemp, ZoneTemp, EsperenceVie, NbPousse, EstEnvahissante
+        ) = dictAutoAssignement[Nom];
+        espece=Espece;
+        comestible=Comestible;
+        mauvaiseHerbe=MauvaiseHerbe;
+        saisonSemis=Saison;
+        terrainPref=TerrainPref;
+        espacement=Espacement;
+        vitesseCroissance=VitesseCroissance;
+        besoinEau=BesoinEau;
+        zoneEau=ZoneEau;
+        besoinLumi=BesoinLumi;
+        zoneLumi=ZoneLumi;
+        besoinNutritif=BesoinNutritif;
+        zoneNutritif=ZoneNutritif;
+        besoinTemp=BesoinTemp;
+        zoneTemp=ZoneTemp;
+        esperenceVie=EsperenceVie;
+        nbPousse = NbPousse;
+        estEnvahissante=EstEnvahissante;
+    }
+    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition){
+        bool respectTemp = besoinTemp-zoneTemp <= Temp && Temp <=besoinTemp+zoneTemp;
+        bool respectLumi = besoinLumi-zoneLumi <= Luminosite && Luminosite <=besoinLumi+zoneLumi;
+        bool respectEau = besoinEau-zoneEau <= Eau && Eau <=besoinEau+zoneEau;
+        bool respectNutrition = besoinNutritif-zoneNutritif <= Nutrition && Nutrition <=besoinNutritif+zoneNutritif;
+    }
+    public void ModifEsperanceVie(){return;}
 
     //dictionnaire qui, pour un string contenant le nom de la plante est capable de lui donner tout les attributs de celle ci
     public static Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)> dictAutoAssignement
