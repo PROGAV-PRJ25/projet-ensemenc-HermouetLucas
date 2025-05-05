@@ -27,6 +27,31 @@ public class Plante{
     private bool estMalade;
     //private List<Maladie> maladie;
 
+    public Plante(string Nom){
+        nom = Nom;
+        var (
+            Espece, Comestible, MauvaiseHerbe, Saison, Sol, Espacement, VitesseCroissance, BesoinEau, ZoneEau, BesoinLumi,
+            ZoneLumi, BesoinNutritif, ZoneNutritif, BesoinTemp, ZoneTemp, EsperenceVie, NbPousse, EstEnvahissante
+        ) = dictAutoAssignement[Nom];
+        espece=Espece;
+        comestible=Comestible;
+        mauvaiseHerbe=MauvaiseHerbe;
+        saisonSemis=Saison;
+        terrainPref=Sol;
+        espacement=Espacement;
+        vitesseCroissance=VitesseCroissance;
+        besoinEau=BesoinEau;
+        zoneEau=ZoneEau;
+        besoinLumi=BesoinLumi;
+        zoneLumi=ZoneLumi;
+        besoinNutritif=BesoinNutritif;
+        zoneNutritif=ZoneNutritif;
+        besoinTemp=BesoinTemp;
+        zoneTemp=ZoneTemp;
+        esperenceVie=EsperenceVie;
+        nbPousse = NbPousse;
+        estEnvahissante=EstEnvahissante;
+    }
     //dictionnaire qui, pour un string contenant le nom de la plante est capable de lui donner tout les attributs de celle ci
     public static Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)> dictAutoAssignement
     = new Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)>
