@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\lhermouet\\.nuget\\packages\\": {}
+    "C:\\Users\\acampioni\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\S6\\Prog\\Projet\\projet-ensemenc-HermouetLucas\\ENSCemance\\ENSCemance.csproj",
+      "projectUniqueName": "H:\\Desktop\\ENSC\\Programmation avancée\\projet-ensemenc-HermouetLucas\\ENSCemance\\ENSCemance.csproj",
       "projectName": "ENSCemance",
-      "projectPath": "H:\\S6\\Prog\\Projet\\projet-ensemenc-HermouetLucas\\ENSCemance\\ENSCemance.csproj",
-      "packagesPath": "C:\\Users\\lhermouet\\.nuget\\packages\\",
-      "outputPath": "H:\\S6\\Prog\\Projet\\projet-ensemenc-HermouetLucas\\ENSCemance\\obj\\",
+      "projectPath": "H:\\Desktop\\ENSC\\Programmation avancée\\projet-ensemenc-HermouetLucas\\ENSCemance\\ENSCemance.csproj",
+      "packagesPath": "C:\\Users\\acampioni\\.nuget\\packages\\",
+      "outputPath": "H:\\Desktop\\ENSC\\Programmation avancée\\projet-ensemenc-HermouetLucas\\ENSCemance\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lhermouet\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\acampioni\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
