@@ -5,6 +5,8 @@ public class Plante
     private string espece;
     private bool comestible;
     private bool mauvaiseHerbe;
+    private bool comestible;
+    private bool mauvaiseHerbe;
     private string saisonSemis;
     private string terrainPref;
     private int espacementMin;
@@ -24,6 +26,7 @@ public class Plante
     private int CompteurDecomposition;
     private bool estEnvahissante;
     private int etapeDeVie;
+    private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private bool estMalade;
     private Maladie maladie;
