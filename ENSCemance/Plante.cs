@@ -1,11 +1,13 @@
-public class Plante{
-    private  string nom;
+public class Plante
+{
+    private Random rd = new Random();
+    private string nom;
     private string espece;
-    private bool comestible; 
-    private  bool mauvaiseHerbe;
+    private bool comestible;
+    private bool mauvaiseHerbe;
     private string saisonSemis;
     private string terrainPref;
-    private int espacement;
+    private int espacementMin;
     private float vitesseCroissance;
     private float besoinEau;
     private float zoneEau;
@@ -15,7 +17,6 @@ public class Plante{
     private float zoneNutritif;
     private float besoinTemp;
     private float zoneTemp;
-    //private List<(Maladie, double)>  maladies;
     private float esperenceVie;
     //en float car on veut pouvoir facilement multiplier par des décimaux
     private float nbPousse;
@@ -23,48 +24,86 @@ public class Plante{
     private int CompteurDecomposition;
     private bool estEnvahissante;
     private int etapeDeVie;
-    private List<(int,int,int)> OrientationTaillepousse;  //Faire x*t puis y*t
+    private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private bool estMalade;
-
-    private bool aRamasse=false;
+    private Maladie maladie;
+    private bool aRamasse = false;
     private bool estRecolte = false;
     //private List<Maladie> maladie;
 
-    public Plante(string Nom){
+    public Plante(string Nom)
+    {
         nom = Nom;
         var (
-            Espece, Comestible, MauvaiseHerbe, Saison, TerrainPref, Espacement, VitesseCroissance, BesoinEau, ZoneEau, BesoinLumi,
+            Espece, Comestible, MauvaiseHerbe, Saison, TerrainPref, EspacementMin, VitesseCroissance, BesoinEau, ZoneEau, BesoinLumi,
             ZoneLumi, BesoinNutritif, ZoneNutritif, BesoinTemp, ZoneTemp, EsperenceVie, NbPousse, EstEnvahissante
         ) = dictAutoAssignement[Nom];
-        espece=Espece;
-        comestible=Comestible;
-        mauvaiseHerbe=MauvaiseHerbe;
-        saisonSemis=Saison;
-        terrainPref=TerrainPref;
-        espacement=Espacement;
-        vitesseCroissance=VitesseCroissance;
-        besoinEau=BesoinEau;
-        zoneEau=ZoneEau;
-        besoinLumi=BesoinLumi;
-        zoneLumi=ZoneLumi;
-        besoinNutritif=BesoinNutritif;
-        zoneNutritif=ZoneNutritif;
-        besoinTemp=BesoinTemp;
-        zoneTemp=ZoneTemp;
-        esperenceVie=EsperenceVie;
+        espece = Espece;
+        comestible = Comestible;
+        mauvaiseHerbe = MauvaiseHerbe;
+        saisonSemis = Saison;
+        terrainPref = TerrainPref;
+        espacementMin = EspacementMin;
+        vitesseCroissance = VitesseCroissance;
+        besoinEau = BesoinEau;
+        zoneEau = ZoneEau;
+        besoinLumi = BesoinLumi;
+        zoneLumi = ZoneLumi;
+        besoinNutritif = BesoinNutritif;
+        zoneNutritif = ZoneNutritif;
+        besoinTemp = BesoinTemp;
+        zoneTemp = ZoneTemp;
+        esperenceVie = EsperenceVie;
         nbPousse = NbPousse;
-        estEnvahissante=EstEnvahissante;
+        estEnvahissante = EstEnvahissante;
     }
-    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition){
-        bool respectTemp = besoinTemp-zoneTemp <= Temp && Temp <=besoinTemp+zoneTemp;
-        bool respectLumi = besoinLumi-zoneLumi <= Luminosite && Luminosite <=besoinLumi+zoneLumi;
-        bool respectEau = besoinEau-zoneEau <= Eau && Eau <=besoinEau+zoneEau;
-        bool respectNutrition = besoinNutritif-zoneNutritif <= Nutrition && Nutrition <=besoinNutritif+zoneNutritif;
+    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition, int espacement, Maladie maladieChoppe = null)
+    {
+        if (estVivante)
+        {//vérification de condition
+            bool respectTemp = besoinTemp - zoneTemp <= Temp && Temp <= besoinTemp + zoneTemp;
+            bool respectLumi = besoinLumi - zoneLumi <= Luminosite && Luminosite <= besoinLumi + zoneLumi;
+            bool respectEau = besoinEau - zoneEau <= Eau && Eau <= besoinEau + zoneEau;
+            bool respectNutrition = besoinNutritif - zoneNutritif <= Nutrition && Nutrition <= besoinNutritif + zoneNutritif;
+            bool respectEspacement = espacement < espacementMin;
+
+            if (!Object.Equals(maladieChoppe, null))
+            {
+                estMalade = IntrusionMaladie(maladieChoppe);
+            }//on utilise ce tableau pour compter le nombre de condition respecté. Içi on utilise pas la maladie. Ces calculs là seront fait à la fin
+            bool[] tabConds = { respectTemp, respectEau, respectLumi, respectNutrition, respectEspacement };
+            int nbCondRespecter = 0;
+            foreach (bool cond in tabConds)
+            {
+                nbCondRespecter += cond ? 1 : 0;
+            }
+            if (nbCondRespecter < 3)
+            {
+                estVivante = false;
+                CompteurDecomposition = 5;
+            }
+            else
+            {
+                int temp = nbCondRespecter - (tabConds.Length / 2) + 1;
+                float vitesseCroissanceBis = vitesseCroissance * (1 + (1 / temp));
+
+            }
+        }
     }
-    public void ModifEsperanceVie(){return;}
+    private bool IntrusionMaladie(Maladie maladieChoppe)
+    {
+        double prob = rd.NextDouble();
+        if (prob <= maladie.probabiliteDLAttraper)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void ModifEsperanceVie() { return; }
+
 
     //dictionnaire qui, pour un string contenant le nom de la plante est capable de lui donner tout les attributs de celle ci
-    public static Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)> dictAutoAssignement
+    private static Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)> dictAutoAssignement
     = new Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)>
     {
         { "batavia", ("batavius", true, false, "printemp", "sec", 1, 1.85f, 1f, 0f, 3f, 1f, 2f, 1f, 25f, 5f, 4.5f, 2f, false) }
