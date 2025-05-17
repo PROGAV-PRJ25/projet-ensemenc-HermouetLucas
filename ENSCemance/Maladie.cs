@@ -15,7 +15,7 @@ public class Maladie
     {
         nom = Nom;
     }
-
+    //**Rapport on passe par des références pour toucher directement aux variables et éviter de retourner des variable de la fonction
     public void Effet(ref float Temp, ref float Luminosite, ref float Eau, ref float Nutrition, ref float esperenceVie)
     {
         switch (nom)
@@ -25,7 +25,7 @@ public class Maladie
         }
 
     }
-    private static Dictionary<string, (float, List<string>)> dictAutoAssignement =
+    private static Dictionary<string, (float, List<string>)> dictAutoAssignementEffet =
     new Dictionary<string, (float, List<string>)>{
         {"Oïdium",(0.15f,new List<string>(){"Round-Up"})},
         {"Mildiou",(0.20f,new List<string>(){"Antibiotique"})},
