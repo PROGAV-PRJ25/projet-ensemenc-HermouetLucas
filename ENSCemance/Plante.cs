@@ -26,7 +26,14 @@ public class Plante
     private int etapeDeVie;
     private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     private bool estMalade;
-    private Maladie maladie;
+    private List<Maladie> maladies = new List<Maladie>();
+    public List<Maladie> Maladies
+    {
+        get
+        {
+            return maladies;
+        }
+    }
     private bool aRamasse = false;
     private bool estRecolte = false;
     //private List<Maladie> maladie;
@@ -34,33 +41,29 @@ public class Plante
     public Plante(string Nom)
     {
         nom = Nom;
-        var (
-            Espece, Comestible, MauvaiseHerbe, Saison, TerrainPref, EspacementMin, VitesseCroissance, BesoinEau, ZoneEau, BesoinLumi,
-            ZoneLumi, BesoinNutritif, ZoneNutritif, BesoinTemp, ZoneTemp, EsperenceVie, NbPousse, EstEnvahissante
+        (
+            espece, comestible, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissance, besoinEau, zoneEau, besoinLumi,
+            zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, estEnvahissante
         ) = dictAutoAssignement[Nom];
-        espece = Espece;
-        comestible = Comestible;
-        mauvaiseHerbe = MauvaiseHerbe;
-        saisonSemis = Saison;
-        terrainPref = TerrainPref;
-        espacementMin = EspacementMin;
-        vitesseCroissance = VitesseCroissance;
-        besoinEau = BesoinEau;
-        zoneEau = ZoneEau;
-        besoinLumi = BesoinLumi;
-        zoneLumi = ZoneLumi;
-        besoinNutritif = BesoinNutritif;
-        zoneNutritif = ZoneNutritif;
-        besoinTemp = BesoinTemp;
-        zoneTemp = ZoneTemp;
-        esperenceVie = EsperenceVie;
-        nbPousse = NbPousse;
-        estEnvahissante = EstEnvahissante;
+
     }
-    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition, int espacement, Maladie maladieChoppe = null)
+    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition, int espacement, Maladie maladieChoppe = null, bool traitement = false, string NomTraitement = "")
     {
         if (estVivante)
         {//vérification de condition
+            //on applique d'abbord les effet des maladie déjà attrapé
+            if (estMalade)
+            {
+                foreach (Maladie maladie in maladies)
+                {
+                    maladie.Effet(BesoinEau: ref besoinEau, BesoinLuminosite: ref besoinLumi, BesoinTemp: ref besoinTemp, BesoinNutrition: ref besoinNutritif, EsperenceVie: ref esperenceVie);
+                    if (traitement)
+                    {
+                        estMalade = maladie.Traiter(NomTraitement);
+                    }
+                }
+            }
+
             bool respectTemp = besoinTemp - zoneTemp <= Temp && Temp <= besoinTemp + zoneTemp;
             bool respectLumi = besoinLumi - zoneLumi <= Luminosite && Luminosite <= besoinLumi + zoneLumi;
             bool respectEau = besoinEau - zoneEau <= Eau && Eau <= besoinEau + zoneEau;
@@ -86,6 +89,10 @@ public class Plante
             {
                 int temp = nbCondRespecter - (tabConds.Length / 2) + 1;
                 float vitesseCroissanceBis = vitesseCroissance * (1 + (1 / temp));
+                if (!Object.Equals(maladieChoppe, null))
+                {
+                    estMalade = estMalade || IntrusionMaladie(maladieChoppe);
+                }
 
             }
         }
@@ -93,11 +100,13 @@ public class Plante
     private bool IntrusionMaladie(Maladie maladieChoppe)
     {
         double prob = rd.NextDouble();
-        if (prob <= maladie.probabiliteDLAttraper)
+        bool testMaladie = (prob <= maladieChoppe.ProbabiliteDLAttraper);
+        if (testMaladie)
         {
-            return true;
+            maladies.Add(maladieChoppe);
         }
-        return false;
+        return testMaladie;
+
     }
     public void ModifEsperanceVie() { return; }
 
