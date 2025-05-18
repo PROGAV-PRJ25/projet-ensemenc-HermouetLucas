@@ -13,7 +13,7 @@ public class PlanteComestible : Plante
     {
         (
             espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
-            zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, matutité, attiranceNuisible
+            zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, attiranceNuisible
         ) = dictAutoAssignement[base.Nom];
 
     }
@@ -23,7 +23,7 @@ public class PlanteComestible : Plante
         ToursGeneral(Temp, Luminosite, Eau, Nutrition, Espacement, TypeTerrain, MaladieChoppe, Traitement, NomTraitement);
         if (estVivante)
         {
-            comestibleT = etapeDeVie <= etapeDeVieMax && matutité <= etapeDeVie;
+            comestibleT = etapeDeVie <= etapeDeVieMax && maturité <= etapeDeVie;
         }
 
     }

@@ -26,13 +26,27 @@ public abstract class Plante
     {
         get
         {
-            return compteurDecomposition<0 ? 0: compteurDecomposition;
+            return compteurDecomposition < 0 ? 0 : compteurDecomposition;
         }
     }
     protected int etapeDeVie = 0;
-    protected int matutité;
+    public int EtapeDeVie
+    {
+        get
+        {
+            return etapeDeVie;
+        }
+    }
+
+    protected int maturité;
+    public int Maturité
+    {
+        get
+        {
+            return maturité;
+        }
+    }
     protected int etapeDeVieMax;
-    protected List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
     protected bool estMalade;
     protected List<Maladie> maladies = new List<Maladie>();
     public List<Maladie> Maladies

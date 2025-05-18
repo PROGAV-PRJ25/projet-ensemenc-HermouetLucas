@@ -5,7 +5,7 @@ public class PlanteNonComestible : Plante
     {
         (
                     espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
-                    zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, matutité, estEnvahissante
+                    zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, estEnvahissante
                 ) = dictAutoAssignement[base.Nom];
     }
 
