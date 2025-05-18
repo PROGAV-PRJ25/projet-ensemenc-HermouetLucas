@@ -6,7 +6,7 @@ public class Terrain
     public float nutrition;
     private List<Intru> intruPossible;
     private List<Maladie> maladiePossible;
-    private string typeTerrain;
+    public string typeTerrain;
     public float indiceTemp;
     public float indiceHum;
     public float indiceLum;
