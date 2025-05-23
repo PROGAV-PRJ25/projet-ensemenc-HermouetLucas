@@ -139,7 +139,72 @@ public abstract class Terrain
                 indiceLum = 0.2f; luminosite = 0.1f;
                 indiceNutrition = 1.0f; nutrition = 0.9f;
                 break;
-            // ... autres types ...
+            case "Oceanique":
+                indiceTemp = 0.6f; temperature = 0.5f;
+                indiceHum = 1.0f; humidite = 0.9f;
+                indiceLum = 0.3f; luminosite = 0.2f;
+                indiceNutrition = 0.5f; nutrition = 0.5f;
+                break;
+            case "Desertique":
+                indiceTemp = 1.0f; temperature = 0.9f;
+                indiceHum = 0.1f; humidite = 0.0f;
+                indiceLum = 1.0f; luminosite = 0.9f;
+                indiceNutrition = 0.1f; nutrition = 0.2f;
+                break;
+            case "Savane":
+                indiceTemp = 0.8f; temperature = 0.7f;
+                indiceHum = 0.2f; humidite = 0.1f;
+                indiceLum = 1.0f; luminosite = 0.9f;
+                indiceNutrition = 0.5f; nutrition = 0.6f;
+                break;
+            case "Plaine":
+                indiceTemp = 0.5f; temperature = 0.5f;
+                indiceHum = 0.5f; humidite = 0.5f;
+                indiceLum = 0.8f; luminosite = 0.7f;
+                indiceNutrition = 0.5f; nutrition = 0.5f;
+                break;
+            case "Urbain":
+                indiceTemp = 0.8f; temperature = 0.7f;
+                indiceHum = 0.2f; humidite = 0.2f;
+                indiceLum = 0.5f; luminosite = 0.5f;
+                indiceNutrition = 0.2f; nutrition = 0.3f;
+                break;
+            case "Forestier":
+                indiceTemp = 0.5f; temperature = 0.5f;
+                indiceHum = 0.5f; humidite = 0.5f;
+                indiceLum = 0.5f; luminosite = 0.5f;
+                indiceNutrition = 0.5f; nutrition = 0.5f;
+                break;
+            case "Glaciaire":
+                indiceTemp = 0.2f; temperature = 0.1f;
+                indiceHum = 0.2f; humidite = 0.2f;
+                indiceLum = 0.5f; luminosite = 0.5f;
+                indiceNutrition = 0.2f; nutrition = 0.2f;
+                break;
+            case "Montagneux":
+                indiceTemp = 0.3f; temperature = 0.2f;
+                indiceHum = 0.5f; humidite = 0.5f;
+                indiceLum = 0.5f; luminosite = 0.5f;
+                indiceNutrition = 0.2f; nutrition = 0.3f;
+                break;
+            case "Steppe":
+                indiceTemp = 0.3f; temperature = 0.3f;
+                indiceHum = 0.5f; humidite = 0.5f;
+                indiceLum = 1.0f; luminosite = 0.9f;
+                indiceNutrition = 0.5f; nutrition = 0.6f;
+                break;
+            case "Marecageux":
+                indiceTemp = 0.5f; temperature = 0.5f;
+                indiceHum = 1.0f; humidite = 0.9f;
+                indiceLum = 0.2f; luminosite = 0.2f;
+                indiceNutrition = 1.0f; nutrition = 0.9f;
+                break;
+            case "Jungle":
+                indiceTemp = 0.9f; temperature = 0.8f;
+                indiceHum = 1.0f; humidite = 0.9f;
+                indiceLum = 1.0f; luminosite = 0.9f;
+                indiceNutrition = 1.0f; nutrition = 0.9f;
+                break;
             default:
                 throw new ArgumentException("Type de terrain inconnu : " + terrainType);
         }
