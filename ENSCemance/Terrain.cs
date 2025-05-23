@@ -96,11 +96,11 @@ public abstract class Terrain
     
     public List<List<Plante>> Potager => potager;
 
-  
+
     /// Dimension dynamique (côté) de la matrice de potager.
     /// Calculée à partir du nombre de lignes dans la liste.
-    
-    public int DimensionPotager => Math.Sqrt(potager?.Count) ?? 0;
+
+    public int DimensionPotager => (potager.Count) / (potager.Count);
 
     #endregion
 
