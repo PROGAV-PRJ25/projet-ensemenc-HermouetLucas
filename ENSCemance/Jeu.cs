@@ -4,17 +4,14 @@ public class Jeu
     private int mois = 4;
     private int annee = 2025;
     private string saison = "hiver";
-    private List<List<Terrain>> jardin = [];
+    private List<Terrain> jardin = [];
 
     public void UpdateNouvelleSaison(float indice)
     {
         for (int i = 0; i < jardin.Count(); i++)
         {
-            for (int j = 0; j < jardin[0].Count(); j++)
-            {
-                Terrain terrainActuel = jardin[i][j];
-                //terrainActuel.temperature = terrainActuel.indiceTemp * indice;
-            }
+            Terrain terrainActuel = jardin[i];
+            //terrainActuel.temperature = terrainActuel.indiceTemp * indice;
         }
     }
     public void UpdateTemps()
@@ -56,11 +53,8 @@ public class Jeu
     {
         for (int i = 0; i < jardin.Count(); i++)
         {
-            for (int j = 0; j < jardin[0].Count(); j++)
-            {
-                Terrain terrainActuel = jardin[i][j];
-                //terrainActuel.nutrition += terrainActuel.indiceNutrition * 2;
-            }
+            Terrain terrainActuel = jardin[i];
+            //terrainActuel.nutrition += terrainActuel.indiceNutrition * 2;
         }
     }
     public void Deserber() { }

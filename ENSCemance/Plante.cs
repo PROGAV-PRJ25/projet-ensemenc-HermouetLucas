@@ -9,13 +9,13 @@ public abstract class Plante
     protected int espacementMin;
     protected float vitesseCroissanceBase;
     protected float vitesseCroissance;
-    protected float besoinEau;
+    public float besoinEau;
     protected float zoneEau;
-    protected float besoinLumi;
+    public float besoinLumi;
     protected float zoneLumi;
-    protected float besoinNutritif;
+    public float besoinNutritif;
     protected float zoneNutritif;
-    protected float besoinTemp;
+    public float besoinTemp;
     protected float zoneTemp;
     protected float esperenceVie;
     //en float car on veut pouvoir facilement multiplier par des décimaux
