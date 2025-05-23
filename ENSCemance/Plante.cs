@@ -28,6 +28,10 @@ public abstract class Plante
         {
             return compteurDecomposition < 0 ? 0 : compteurDecomposition;
         }
+        set
+        {
+            compteurDecomposition = value;
+        }
     }
     protected int etapeDeVie = 0;
     public int EtapeDeVie
