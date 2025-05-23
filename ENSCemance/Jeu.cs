@@ -13,7 +13,7 @@ public class Jeu
             for (int j = 0; j < jardin[0].Count(); j++)
             {
                 Terrain terrainActuel = jardin[i][j];
-                terrainActuel.temperature = terrainActuel.indiceTemp * indice;
+                //terrainActuel.temperature = terrainActuel.indiceTemp * indice;
             }
         }
     }
@@ -59,7 +59,7 @@ public class Jeu
             for (int j = 0; j < jardin[0].Count(); j++)
             {
                 Terrain terrainActuel = jardin[i][j];
-                terrainActuel.nutrition += terrainActuel.indiceNutrition * 2;
+                //terrainActuel.nutrition += terrainActuel.indiceNutrition * 2;
             }
         }
     }
