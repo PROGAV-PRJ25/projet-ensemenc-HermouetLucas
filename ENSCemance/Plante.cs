@@ -33,7 +33,7 @@ public abstract class Plante
             compteurDecomposition = value;
         }
     }
-    protected int etapeDeVie = 0;
+    public int etapeDeVie = 0;
     public int EtapeDeVie
     {
         get
