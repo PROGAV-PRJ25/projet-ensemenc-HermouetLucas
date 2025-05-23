@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 public class Jeu
 {
     private int semaine = 1;
@@ -7,7 +9,16 @@ public class Jeu
     private List<Terrain> jardin = [];
     private bool dansJardin = true;
     public int positionTerrainSelectionner;
-    public int positionCurseurTerrain;
+    public int positionCurseurTerrain = 0;
+
+
+    // A mettre dans le terrain plutôt ? 
+    // Calcule la dimension (côté) du jardin (carré)
+    private int DimensionJardin
+    {
+        get { return (int)Math.Sqrt(jardin.Count); }
+    }
+
 
     public void UpdateNouvelleSaison(float indice)
     {
@@ -65,67 +76,107 @@ public class Jeu
     {
         if (dansJardin)
         {
-            // possibilité de bouger le curseur et de séléctionner un terrain
+            bool selectionTerrain = false;
+            int dimension = DimensionJardin;
+
+            while (!selectionTerrain)
+            {
+                Console.Clear();
+                // Affichage du jardin (utiliser AffichageTerrain)
+                var affichage = new AffichageTerrain();
+                affichage.jardin = jardin;
+                affichage.tailleJardin = dimension;
+                affichage.positionCurseur = positionCurseurTerrain;
+                affichage.annee = annee;
+                affichage.mois = mois;
+                affichage.semaine = semaine;
+                affichage.AffichageComplet();
+
+                // Lecture de la touche
+                var key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (positionCurseurTerrain - dimension >= 0)
+                            positionCurseurTerrain -= dimension;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (positionCurseurTerrain + dimension < jardin.Count)
+                            positionCurseurTerrain += dimension;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (positionCurseurTerrain % dimension > 0)
+                            positionCurseurTerrain -= 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (positionCurseurTerrain % dimension < dimension - 1)
+                            positionCurseurTerrain += 1;
+                        break;
+                    case ConsoleKey.Enter:
+                        // sélectionner le terrain courant
+                        positionTerrainSelectionner = positionCurseurTerrain;
+                        dansJardin = false;
+                        selectionTerrain = true;
+                        break;
+                    case ConsoleKey.V:
+                        // passer la semaine sans sortir
+                        PasserSemaine();
+                        break;
+                        // ajouter autres raccourcis si besoin
+                }
+            }
+
         }
         else
         {
             bool selectionTerminer = true;
             while (selectionTerminer)
-            { //ajouter la possiblilité de déplacement ici aussi
+            {
                 Console.WriteLine();
-                Console.WriteLine("Selectionner une action à faire : ");
-                Console.WriteLine(" - Déserber : retire la plante selectionner | appuyer sur d");
-                Console.WriteLine(" - Pailler : augmente légèrement la chaleur de la plante selectionner| appuyer sur p");
-                Console.WriteLine(" - Traiter : retire la maladie de la plante selectionner | appuyer sur t");
-                Console.WriteLine(" - Semer : plante une plante à l'endrois selectionner | appuyer sur s");
-                Console.WriteLine(" - Arroser : arrose la plante à l'endrois selectionner | appuyer sur a");
-                Console.WriteLine(" - Pour revenir sur la liste des terrains | appuyer sur r");
-                Console.WriteLine(" - Pour terminer la semaine | appuyer sur v");
-                string input = Convert.ToString(Console.ReadKey());
+                Console.WriteLine("Sélectionner une action à faire : ");
+                Console.WriteLine(" - Désherber : appuyer sur d");
+                Console.WriteLine(" - Pailler : appuyer sur p");
+                Console.WriteLine(" - Traiter : appuyer sur t");
+                Console.WriteLine(" - Semer : appuyer sur s");
+                Console.WriteLine(" - Arroser : appuyer sur a");
+                Console.WriteLine(" - Pour revenir au jardin : r");
+                Console.WriteLine(" - Pour terminer la semaine : v");
+
+                var input = Console.ReadKey(true).Key;
                 switch (input)
                 {
-                    case "d":
-                        Deserber();
+                    case ConsoleKey.D:
+                        Desherber();
                         selectionTerminer = false;
                         break;
-
-                    case "p":
+                    case ConsoleKey.P:
                         Pailler();
                         selectionTerminer = false;
-
                         break;
-
-                    case "t":
+                    case ConsoleKey.T:
                         Traiter();
                         selectionTerminer = false;
-
                         break;
-
-                    case "s":
+                    case ConsoleKey.S:
                         Semer();
                         selectionTerminer = false;
                         break;
-
-                    case "a":
+                    case ConsoleKey.A:
                         Arroser();
                         selectionTerminer = false;
                         break;
-
-                    case "r":
-                        //pour revenir à liste des terrain
+                    case ConsoleKey.R:
+                        // revenir au jardin
+                        dansJardin = true;
                         selectionTerminer = false;
-
                         break;
-
-                    case "v":
+                    case ConsoleKey.V:
                         PasserSemaine();
                         selectionTerminer = false;
                         break;
-
                     default:
                         Console.WriteLine("Mauvais input");
                         break;
-
                 }
 
             }
@@ -248,4 +299,5 @@ public class Jeu
         AugmenterNutrition();
         UpdateTemps(); // il faut faire pousser les plantes ici et faire en sorte qu'elles ai + soif
     }
+}
 }
