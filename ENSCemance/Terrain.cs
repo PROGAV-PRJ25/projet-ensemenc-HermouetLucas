@@ -266,6 +266,16 @@ public abstract class Terrain
     }
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    /// Plante une nouvelle plante à la position (ligne, colonne) si la case est vide.
+
+  
+
+>>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
+>>>>>>> 2f7d1410b1cea194c9ce1e197b123611d20fac6b
     /// Met à jour les états du terrain en fonction de la saison et des plantes.
 
     public abstract void MettreAJourEtat();
