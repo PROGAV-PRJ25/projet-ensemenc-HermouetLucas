@@ -20,9 +20,12 @@ public class Jeu
     }
     public Jeu()
     {
-        for (int i = 0; i < 64; i++)
+        List<string> differentsTerrainType = new List<string>() { "Jungle", "Marecageux", "Steppe", "Montagneux", "Glaciaire", "Forestier", "Urbain", "Plaine", "Savane", "Desertique", "Oceanique", "Volcanique" };
+        Random random = new Random();
+        string terrainType = differentsTerrainType[random.Next(12)];
+        for (int i = 0; i < 9; i++)
         {
-
+            jardin.Add(new Terrain(terrainType, 9));
         }
     }
 
@@ -187,11 +190,11 @@ public class Jeu
             while (selectionTerminer)
             {
                 Console.Clear();
-                Terrain terrainActuel = jardin[positionTerrainSelectionner];
+                Terrain terrainActuel1 = jardin[positionTerrainSelectionner];
                 // Affichage du potager (utiliser AffichagePotager)
                 var affichage = new AffichagePotager();
-                affichage.potager = terrainActuel.Potager;
-                affichage.taillePotager = terrainActuel.taillePotager;
+                affichage.potager = terrainActuel1.Potager;
+                affichage.taillePotager = terrainActuel1.taillePotager;
                 affichage.positionCurseur = positionCurseurTerrain;
                 affichage.AffichageComplet();
 

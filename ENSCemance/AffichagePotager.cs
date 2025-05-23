@@ -658,6 +658,19 @@ public class AffichagePotager
         "      ███░░█    ░░░  "
         ]},
 };
+    public Dictionary<int, List<string>> planteVide = new Dictionary<int, List<string>>()
+{
+    {9,["planteVide"]},
+    {0,[
+"                     ",
+"                     ",
+"                     ",
+"                     ",
+"                     ",
+"                     ",
+"                     ",
+"                     "]
+} };
 
     public Dictionary<string, ConsoleColor> couleurApproprie = new Dictionary<string, ConsoleColor>()
     {
@@ -673,7 +686,8 @@ public class AffichagePotager
         {"calyxia",ConsoleColor.DarkGreen},
         {"racineDeFer",ConsoleColor.DarkGray},
         {"mauvaiseHerbe1",ConsoleColor.DarkGreen},
-        {"mauvaiseHerbe2",ConsoleColor.DarkYellow}
+        {"mauvaiseHerbe2",ConsoleColor.DarkYellow},
+        {"planteVide",ConsoleColor.White}
     };
     public Dictionary<string, Dictionary<int, List<string>>> dictionnaire;
 
@@ -694,13 +708,21 @@ public class AffichagePotager
             { "calyxia", calyxia },
             { "racineDeFer", racineDeFer },
             { "mauvaiseHerbe1", mauvaiseHerbe1 },
-            { "mauvaiseHerbe2", mauvaiseHerbe2 }
+            { "mauvaiseHerbe2", mauvaiseHerbe2 },
+            { "planteVide", planteVide }
         };
 
 
         for (int i = 0; i < this.potager.Count(); i++)
         {
-            emplacement.Add(dictionnaire[this.potager[i].Nom]);//permet d'ajouter la liste/image correspondante
+            if (this.potager[i] != null)
+            {
+                emplacement.Add(dictionnaire[this.potager[i].Nom]);//permet d'ajouter la liste/image correspondante}
+            }
+            else
+            {
+                emplacement.Add(planteVide);
+            }
         }
     }
     public void AffichageComplet()
@@ -721,7 +743,15 @@ public class AffichagePotager
                         curseur = false;
                     }
                     Dictionary<int, List<string>> planteActuel = emplacement[j + i * this.taillePotager];
-                    List<string> etatDeViePlante = planteActuel[this.potager[j + i * this.taillePotager].etapeDeVie];
+                    List<string> etatDeViePlante = new List<string>();
+                    if (emplacement[j + i * this.taillePotager] != null)
+                    {
+                        etatDeViePlante = planteActuel[this.potager[j + i * this.taillePotager].etapeDeVie];
+                    }
+                    else
+                    {
+                        etatDeViePlante = planteVide[0];
+                    }
                     plante(entier, curseur, etatDeViePlante, couleurApproprie[etatDeViePlante[0]], this.potager[j + i * this.taillePotager].Maladies);
                     Console.WriteLine();
                 }

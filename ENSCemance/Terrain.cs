@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 /// Classe abstraite représentant les caractéristiques communes d'un terrain.
 
-public abstract class Terrain
+public class Terrain
 {
     // États du terrain
     protected float temperature;
@@ -117,7 +117,7 @@ public abstract class Terrain
 
     /// Constructeur protégé initialisant tous les attributs selon le type de terrain.
 
-    protected Terrain(string terrainType, int taillePotager)
+    public Terrain(string terrainType, int taillePotager)
     {
         this.terrainType = terrainType;
         this.taillePotager = taillePotager;
