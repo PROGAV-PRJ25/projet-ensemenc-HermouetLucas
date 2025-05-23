@@ -19,7 +19,7 @@ public abstract class Terrain
     protected float indiceNutrition;
 
     // Type de terrain (ex: "Forestier", "Désertique", ...)
-    protected string terrainType;
+    public string terrainType;
 
     // Listes des intrus et maladies possibles sur ce terrain
     protected List<Intru> intruPossible;
@@ -266,10 +266,22 @@ public abstract class Terrain
     }
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 2c2c8df6af7aa14fb0e5bc1c3f7ce812719a0e64
     /// Plante une nouvelle plante à la position (ligne, colonne) si la case est vide.
 
   
 
+<<<<<<< HEAD
+=======
+>>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
+>>>>>>> 2f7d1410b1cea194c9ce1e197b123611d20fac6b
+>>>>>>> 2c2c8df6af7aa14fb0e5bc1c3f7ce812719a0e64
     /// Met à jour les états du terrain en fonction de la saison et des plantes.
 
     public abstract void MettreAJourEtat();
