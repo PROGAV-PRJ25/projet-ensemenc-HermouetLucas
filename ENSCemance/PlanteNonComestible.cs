@@ -1,11 +1,11 @@
 public class PlanteNonComestible : Plante
 {
-    public bool estEnvahissante;
+    public bool EstEnvahissante;
     public PlanteNonComestible(string Nom) : base(Nom)
     {
         (
                     Espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
-                    zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, estEnvahissante
+                    zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, EstEnvahissante
                 ) = dictAutoAssignement[base.Nom];
     }
 
