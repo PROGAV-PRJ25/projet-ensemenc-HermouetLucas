@@ -10,6 +10,7 @@ public class Jeu
     private bool dansJardin = true;
     public int positionTerrainSelectionner;
     public int positionCurseurTerrain = 0;
+    private Terrain terrainActuel;
 
     public bool mode;
 
@@ -30,7 +31,7 @@ public class Jeu
     {
         for (int i = 0; i < jardin.Count(); i++)
         {
-            Terrain terrainActuel = jardin[i];
+            terrainActuel = jardin[i];
             //terrainActuel.temperature = terrainActuel.indiceTemp * indice;
         }
     }
@@ -73,7 +74,7 @@ public class Jeu
     {
         for (int i = 0; i < jardin.Count(); i++)
         {
-            Terrain terrainActuel = jardin[i];
+            terrainActuel = jardin[i];
             terrainActuel.Nutrition += terrainActuel.IndiceNutrition * 2;
         }
     }
@@ -139,7 +140,7 @@ public class Jeu
 
             // Mode potager : déplacement dans la liste aplatie de plantes
             bool selectionPotager = false;
-            Terrain terrainActuel = jardin[positionTerrainSelectionner];
+            terrainActuel = jardin[positionTerrainSelectionner];
             int dimensionPotager = terrainActuel.DimensionPotager;
 
             while (!selectionPotager)
@@ -187,7 +188,7 @@ public class Jeu
             while (selectionTerminer)
             {
                 Console.Clear();
-                Terrain terrainActuel = jardin[positionTerrainSelectionner];
+                terrainActuel = jardin[positionTerrainSelectionner];
                 // Affichage du potager (utiliser AffichagePotager)
                 var affichage = new AffichagePotager();
                 affichage.potager = terrainActuel.Potager;
@@ -248,12 +249,12 @@ public class Jeu
     }
     public void Deserber()
     {
-        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel = jardin[positionTerrainSelectionner];
         terrainActuel.Potager[positionCurseurTerrain] = null; //plante vide
     }
     private void Pailler()
     {
-        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel = jardin[positionTerrainSelectionner];
         if (terrainActuel.Potager[positionCurseurTerrain].besoinTemp > 0.2)
         {
             terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0.2f;
@@ -266,7 +267,7 @@ public class Jeu
     }
     private void Arroser()
     {
-        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel = jardin[positionTerrainSelectionner];
         if (terrainActuel.Potager[positionCurseurTerrain].besoinEau > 0.2)
         {
             terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0.2f;
@@ -278,7 +279,7 @@ public class Jeu
     }
     private void Traiter()
     {
-        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel = jardin[positionTerrainSelectionner];
         terrainActuel.Potager[positionCurseurTerrain].Maladies = [];
     }
     private void Semer()
@@ -298,7 +299,7 @@ public class Jeu
         Console.WriteLine(" t pour revenir en arrière");
 
         bool selectionTerminer = true;
-        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel = jardin[positionTerrainSelectionner];
         while (selectionTerminer)
         {
             string input = Convert.ToString(Console.ReadKey());
