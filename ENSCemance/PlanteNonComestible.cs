@@ -12,6 +12,6 @@ public class PlanteNonComestible : Plante
     private static Dictionary<string, (string, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, int, int, bool)> dictAutoAssignement
     = new Dictionary<string, (string, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, int, int, bool)>
     {
-        { "Chienli", ("batavius", false, "printemp", "sec", 1, 1.85f, 1f, 0f, 3f, 1f, 2f, 1f, 25f, 5f, 4.5f, 2f,8,5,true) }
+        { "Chienli", ("chiantos", false, "printemp", "sec", 1, 1.85f, 1f, 0f, 3f, 1f, 2f, 1f, 25f, 5f, 4.5f, 2f,8,5,true) }
     };
 }
