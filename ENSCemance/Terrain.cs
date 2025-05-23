@@ -20,9 +20,10 @@ public class Terrain
 
     // Type de terrain (ex: "Forestier", "Désertique", ...)
     public string terrainType;
-
+    private bool intruPresent;
     // Listes des intrus et maladies possibles sur ce terrain
     private List<Intru> intruPossible;
+    private bool estMalade;
     private List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et liste aplatie de plantes
@@ -35,6 +36,21 @@ public class Terrain
     {
         get { return temperature; }
         set { temperature = value; }
+    }
+    public bool IntruPresent
+    {
+        get
+        {
+            return intruPresent;
+        }
+    }
+
+    public bool EstMalade
+    {
+        get
+        {
+            return estMalade;
+        }
     }
 
     public float Humidite
@@ -271,5 +287,8 @@ public class Terrain
 
     /// Initialise les listes d'intrus et de maladies possibles pour ce terrain.
 
-    public void InitialiserEvenements() { }
+    public void InitialiserEvenements()
+    {
+
+    }
 }
