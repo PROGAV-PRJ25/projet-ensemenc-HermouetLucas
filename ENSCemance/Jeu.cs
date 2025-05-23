@@ -142,11 +142,11 @@ public class Jeu
         Terrain terrainActuel = jardin[positionTerrainSelectionner];
         if (terrainActuel.Potager[positionCurseurTerrain].besoinTemp > 0.2)
         {
-            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0.2f; //peut être retirer le [0]
+            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0.2f;
         }
         else
         {
-            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0f; //peut être retirer le [0]
+            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0f;
         }
 
     }
@@ -155,17 +155,17 @@ public class Jeu
         Terrain terrainActuel = jardin[positionTerrainSelectionner];
         if (terrainActuel.Potager[positionCurseurTerrain].besoinEau > 0.2)
         {
-            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0.2f; //peut être retirer le [0]
+            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0.2f;
         }
         else
         {
-            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0f; //peut être retirer le [0]
+            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0f;
         }
     }
     private void Traiter()
     {
         Terrain terrainActuel = jardin[positionTerrainSelectionner];
-        terrainActuel.Potager[positionCurseurTerrain][0].Maladies = [];
+        terrainActuel.Potager[positionCurseurTerrain].Maladies = [];
     }
     private void Semer()
     {

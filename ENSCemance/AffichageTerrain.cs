@@ -193,7 +193,7 @@ public class AffichageTerrain
 
         for (int i = 0; i < this.jardin.Count(); i++)
         {
-            emplacement.Add(dictionnaire[this.jardin[i].TypeTerrain]);//permet d'ajouter la liste/image correspondante
+            emplacement.Add(dictionnaire[this.jardin[i].terrainType]);//permet d'ajouter la liste/image correspondante
         }
     }
     public void AffichageComplet()

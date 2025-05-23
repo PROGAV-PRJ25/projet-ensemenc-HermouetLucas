@@ -19,7 +19,7 @@ public abstract class Terrain
     protected float indiceNutrition;
 
     // Type de terrain (ex: "Forestier", "Désertique", ...)
-    protected string terrainType;
+    public string terrainType;
 
     // Listes des intrus et maladies possibles sur ce terrain
     protected List<Intru> intruPossible;
@@ -31,72 +31,6 @@ public abstract class Terrain
 
     #region Propriétés
 
-<<<<<<< HEAD
-
-    /// Température actuelle du terrain.
-
-    public float Temperature { get => temperature; set => temperature = value; }
-
-
-    /// Humidité actuelle du terrain.
-
-    public float Humidite { get => humidite; set => humidite = value; }
-
-
-    /// Luminosité actuelle du terrain.
-
-    public float Luminosite { get => luminosite; set => luminosite = value; }
-
-
-    /// Nutrition actuelle du terrain.
-
-    public float Nutrition { get => nutrition; set => nutrition = value; }
-
-
-    /// Indice d'influence saisonnière sur la température.
-
-    public float IndiceTemp { get => indiceTemp; set => indiceTemp = value; }
-
-
-    /// Indice d'influence saisonnière sur l'humidité.
-
-    public float IndiceHum { get => indiceHum; set => indiceHum = value; }
-
-
-    /// Indice d'influence saisonnière sur la luminosité.
-
-    public float IndiceLum { get => indiceLum; set => indiceLum = value; }
-
-
-    /// Indice d'influence des plantes sur la nutrition.
-
-    public float IndiceNutrition { get => indiceNutrition; set => indiceNutrition = value; }
-
-
-    /// Type de ce terrain (ex: "Forestier", "Désertique").
-
-    public string TypeTerrain => typeTerrain;
-
-
-    /// Liste des intrus pouvant apparaître sur ce terrain.
-
-    public List<Intru> IntruPossible => intruPossible;
-
-
-    /// Liste des maladies pouvant affecter ce terrain.
-
-    public List<Maladie> MaladiePossible => maladiePossible;
-
-
-    /// Taille initiale du potager (côté du carré).
-
-    public int TaillePotager => taillePotager;
-
-
-    /// Matrice des plantes plantées sur ce terrain.
-
-    public List<List<Plante>> Potager => potager;
-=======
     public float Temperature
     {
         get { return temperature; }
@@ -167,7 +101,6 @@ public abstract class Terrain
     {
         get { return potager.Count; }
     }
->>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
 
     public int DimensionPotager
     {
@@ -182,21 +115,9 @@ public abstract class Terrain
     #endregion
 
 
-<<<<<<< HEAD
-    /// Constructeur protégé de la classe abstraite Terrain.
-
-    protected Terrain(
-        string typeTerrain,
-        float indiceTemp,
-        float indiceHum,
-        float indiceLum,
-        float indiceNutrition,
-        int taillePotager)
-=======
     /// Constructeur protégé initialisant tous les attributs selon le type de terrain.
 
     protected Terrain(string terrainType, int taillePotager)
->>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
     {
         this.terrainType = terrainType;
         this.taillePotager = taillePotager;
@@ -345,66 +266,6 @@ public abstract class Terrain
     }
 
 
-<<<<<<< HEAD
-=======
-    /// Plante une nouvelle plante à la position (ligne, colonne) si la case est vide.
-
-    /// paramètre : name="plante">Instance de Plante à semer.
-    /// paramètre : name="ligne">Coordonnée ligne dans le potager.
-    /// paramètre : name="colonne">Coordonnée colonne dans le potager.
-    public void Semer(Plante plante, int ligne, int colonne)
-    {
-        if (ligne < 0 || ligne >= DimensionPotager || colonne < 0 || colonne >= DimensionPotager)
-            throw new ArgumentOutOfRangeException("Coordonnées hors potager");
-        int idx = ligne * DimensionPotager + colonne;
-        if (potager[idx] != null)
-            throw new InvalidOperationException("La case n'est pas vide");
-        potager[idx] = plante;
-    }
-
-
-    /// Récolte et retire la plante à la position (ligne, colonne).
-
-    /// paramètre : name="ligne">Coordonnée ligne dans le potager.
-    /// paramètre : name="colonne">Coordonnée colonne dans le potager.
-    /// returns : La plante récoltée, ou null si case vide.
-    public Plante Recolter(int ligne, int colonne)
-    {
-        if (ligne < 0 || ligne >= DimensionPotager || colonne < 0 || colonne >= DimensionPotager)
-            throw new ArgumentOutOfRangeException("Coordonnées hors potager");
-        int idx = ligne * DimensionPotager + colonne;
-        Plante planteRetiree = potager[idx];
-        potager[idx] = null;
-        return planteRetiree;
-    }
-
-
-    /// Désherbe le potager : retire toutes les mauvaises herbes.
-
-    public void Desherber()
-    {
-        for (int i = 0; i < potager.Count; i++)
-        {
-            if (potager[i] != null && potager[i].MauvaiseHerbe)
-                potager[i] = null;
-        }
-    }
-
-
-    /// Compte le nombre de plantes actuellement dans le potager.
-
-    /// returns : Le nombre de plantes non nulles.
-    public int CompterPlantes()
-    {
-        int count = 0;
-        foreach (var p in potager)
-            if (p != null)
-                count++;
-        return count;
-    }
-
-
->>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
     /// Met à jour les états du terrain en fonction de la saison et des plantes.
 
     public abstract void MettreAJourEtat();
