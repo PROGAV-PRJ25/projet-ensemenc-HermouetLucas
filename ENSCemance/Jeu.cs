@@ -191,7 +191,7 @@ public class Jeu
             while (selectionTerminer)
             {
                 Console.Clear();
-                Terrain terrainActuel = jardin[positionTerrainSelectionner];
+                Terrain terrainActuel1 = jardin[positionTerrainSelectionner];
                 // Affichage du potager (utiliser AffichagePotager)
                 var affichage = new AffichagePotager();
                 affichage.potager = terrainActuel1.Potager;
