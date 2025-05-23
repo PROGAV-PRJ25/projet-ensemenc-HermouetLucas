@@ -3,6 +3,10 @@ public class AffichageTerrain
     public int tailleJardin; //récupérer les valeur dans jeu
     public List<Terrain> jardin;//récupérer les valeur dans jeu
     public int positionCurseur;//récupérer les valeur dans jeu
+    public int annee;
+    public int mois;
+    public int semaine;
+
     public List<List<string>> emplacement = new List<List<string>>();
 
     public List<string> volcanique = new List<string>()
@@ -189,7 +193,7 @@ public class AffichageTerrain
 
         for (int i = 0; i < this.jardin.Count(); i++)
         {
-            emplacement.Add(dictionnaire[this.jardin[i].TypeTerrain]);//permet d'ajouter la liste/image correspondante
+            emplacement.Add(dictionnaire[this.jardin[i].terrainType]);//permet d'ajouter la liste/image correspondante
         }
     }
     public void AffichageComplet()
@@ -210,13 +214,29 @@ public class AffichageTerrain
                         curseur = false;
                     }
                     List<string> terrainActuel = emplacement[j + i * this.tailleJardin];
-                    Terrain(entier, curseur, terrainActuel, couleurApproprie[terrainActuel[0]]);
+                    terrain(entier, curseur, terrainActuel, couleurApproprie[terrainActuel[0]]);
                     Console.WriteLine();
                 }
             }
         }
+        Console.Write("Terrain : " + this.jardin[positionCurseur].GetType());
+
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.Write(" Indice température : " + this.jardin[positionCurseur].IndiceTemp);
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write(" Indice humidité : " + this.jardin[positionCurseur].IndiceTemp);
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write(" Indice luminosité : " + this.jardin[positionCurseur].IndiceTemp);
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(" Indice nutrition : " + this.jardin[positionCurseur].IndiceTemp);
+
+        Console.WriteLine();
+        Console.Write("Année : " + this.annee + " Mois : " + this.mois + " Semaine : " + this.semaine);
     }
-    public void Terrain(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur)
+    public void terrain(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur)
     {
         if (ligne == 0)
         {

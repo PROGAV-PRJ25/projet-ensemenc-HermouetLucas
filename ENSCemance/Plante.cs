@@ -3,19 +3,19 @@ public abstract class Plante
     protected Random rd = new Random(); //m'évitera de devoir
     public string Nom { get; set; }
     public string Espece { get; set; }
-    protected bool mauvaiseHerbe;
+    public bool mauvaiseHerbe;
     protected string saisonSemis;
     protected string terrainPref;
     protected int espacementMin;
     protected float vitesseCroissanceBase;
     protected float vitesseCroissance;
-    protected float besoinEau;
+    public float besoinEau;
     protected float zoneEau;
-    protected float besoinLumi;
+    public float besoinLumi;
     protected float zoneLumi;
-    protected float besoinNutritif;
+    public float besoinNutritif;
     protected float zoneNutritif;
-    protected float besoinTemp;
+    public float besoinTemp;
     protected float zoneTemp;
     protected float esperenceVie;
     //en float car on veut pouvoir facilement multiplier par des décimaux
@@ -33,7 +33,7 @@ public abstract class Plante
             compteurDecomposition = value;
         }
     }
-    protected int etapeDeVie = 0;
+    public int etapeDeVie = 0;
     public int EtapeDeVie
     {
         get
@@ -59,6 +59,7 @@ public abstract class Plante
         {
             return maladies;
         }
+        set { }
     }
     protected bool aRamasse = false;
     protected bool estRecolte = false;
