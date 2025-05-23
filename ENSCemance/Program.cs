@@ -12,6 +12,7 @@ t[5] = new Maladie("Oïdium");
 t[6] = null;
 t[7] = new Maladie("Oïdium");
 
-foreach(Maladie m in t){
+foreach (Maladie m in t)
+{
     Console.WriteLine("Hello");
 }

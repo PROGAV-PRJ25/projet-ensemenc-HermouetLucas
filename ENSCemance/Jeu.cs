@@ -146,7 +146,7 @@ public class Jeu
                 switch (input)
                 {
                     case ConsoleKey.D:
-                        Desherber();
+                        Deserber();
                         selectionTerminer = false;
                         break;
                     case ConsoleKey.P:
@@ -322,5 +322,8 @@ public class Jeu
         AugmenterNutrition();
         UpdateTemps(); // il faut faire pousser les plantes ici et faire en sorte qu'elles ai + soif
     }
-}
+    public void PlanteQuiPousse()
+    {
+        // faire en sorte que les plantes poussent en fonction de leurs indice de croissance / il faut également que les niveaux de croissance augmente.
+    }
 }
