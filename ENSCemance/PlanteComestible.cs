@@ -12,7 +12,7 @@ public class PlanteComestible : Plante
     public PlanteComestible(string Nom) : base(Nom)
     {
         (
-            espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
+            Espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
             zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, attiranceNuisible
         ) = dictAutoAssignement[base.Nom];
 
@@ -21,7 +21,7 @@ public class PlanteComestible : Plante
     Maladie MaladieChoppe = null, bool Traitement = false, string NomTraitement = "")
     {
         ToursGeneral(Temp, Luminosite, Eau, Nutrition, Espacement, TypeTerrain, MaladieChoppe, Traitement, NomTraitement);
-        if (estVivante)
+        if (EstVivante)
         {
             comestibleT = etapeDeVie <= etapeDeVieMax && maturité <= etapeDeVie;
         }

@@ -2,7 +2,7 @@ public abstract class Plante
 {
     protected Random rd = new Random(); //m'évitera de devoir
     public string Nom { get; set; }
-    protected string espece;
+    public string Espece { get; set; }
     protected bool mauvaiseHerbe;
     protected string saisonSemis;
     protected string terrainPref;
@@ -20,7 +20,7 @@ public abstract class Plante
     protected float esperenceVie;
     //en float car on veut pouvoir facilement multiplier par des décimaux
     protected float nbPousse;
-    protected bool estVivante;
+    public bool EstVivante { get; set; }
     protected int compteurDecomposition;
     public int CompteurDecomposition
     {
@@ -69,7 +69,7 @@ public abstract class Plante
     protected void ToursGeneral(float Temp, float Luminosite, float Eau, float Nutrition, int Espacement, string TypeTerrain, //ligne avec les paramètres obligatoires
     Maladie MaladieChoppe = null, bool Traitement = false, string NomTraitement = "")// ligne avec les paramètres optionnels
     {
-        if (estVivante)
+        if (EstVivante)
         {//vérification de condition
             //on applique d'abbord les effet des maladie déjà attrapé
             if (estMalade)
@@ -98,8 +98,8 @@ public abstract class Plante
             //on augmente de autant que la vitesse de croissance est
             etapeDeVie += (int)(vitesseCroissance < 1 ? (1 < vitesseCroissance ? Math.Round(vitesseCroissance) : 1) : (vitesseCroissance <= 0.5 ? 0 : 1));
             //second calcul de mort de la plate: espèrence vie
-            estVivante = !(etapeDeVieMax < etapeDeVie);
-            compteurDecomposition = !estVivante ? 5 : 0;
+            EstVivante = !(etapeDeVieMax < etapeDeVie);
+            compteurDecomposition = !EstVivante ? 5 : 0;
 
         }
         else
@@ -128,7 +128,7 @@ public abstract class Plante
         }
         if (nbCondRespecter < 3)
         {
-            estVivante = false;
+            EstVivante = false;
             compteurDecomposition = 5;
         }
         else

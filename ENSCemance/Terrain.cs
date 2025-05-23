@@ -22,7 +22,7 @@ public abstract class Terrain
     public string typeTerrain;
 
     // Listes des intrus et maladies possibles sur ce terrain
-    protected List<Intrus> intruPossible;
+    protected List<Intru> intruPossible;
     protected List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et matrice de plantes
@@ -79,7 +79,7 @@ public abstract class Terrain
   
     /// Liste des intrus pouvant apparaître sur ce terrain.
     
-    public List<Intrus> IntruPossible => intruPossible;
+    public List<Intru> IntruPossible => intruPossible;
 
   
     /// Liste des maladies pouvant affecter ce terrain.
@@ -100,7 +100,7 @@ public abstract class Terrain
     /// Dimension dynamique (côté) de la matrice de potager.
     /// Calculée à partir du nombre de lignes dans la liste.
 
-    public int DimensionPotager => (potager.Count) / (potager.Count);
+    public int DimensionPotager => (int)Math.Sqrt(Convert.ToDouble(potager.Count));
 
     #endregion
 
@@ -122,7 +122,7 @@ public abstract class Terrain
         this.indiceNutrition = indiceNutrition;
         this.taillePotager = taillePotager;
 
-        intruPossible = new List<Intrus>();
+        intruPossible = new List<Intru>();
         maladiePossible = new List<Maladie>();
 
         // Initialisation de la matrice du potager avec des null (pas de plante)
