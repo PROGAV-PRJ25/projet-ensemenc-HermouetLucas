@@ -11,6 +11,8 @@ public class Jeu
     public int positionTerrainSelectionner;
     public int positionCurseurTerrain = 0;
 
+    public bool mode;
+
 
     // A mettre dans le terrain plutôt ? 
     // Calcule la dimension (côté) du jardin (carré)
@@ -324,6 +326,7 @@ public class Jeu
     }
     public void PlanteQuiPousse()
     {
-        // faire en sorte que les plantes poussent en fonction de leurs indice de croissance / il faut également que les niveaux de croissance augmente.
+        jardin[positionTerrainSelectionner].MettreAJourEtat();
+
     }
 }
