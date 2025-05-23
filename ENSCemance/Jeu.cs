@@ -388,6 +388,7 @@ public class Jeu
     {
         AugmenterNutrition();
         UpdateTemps(); // il faut faire pousser les plantes ici et faire en sorte qu'elles ai + soif
+        //bool isIntru = 
     }
     public void PlanteQuiPousse()
     {
