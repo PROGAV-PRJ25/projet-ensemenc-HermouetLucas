@@ -4,7 +4,7 @@ public class PlanteNonComestible : Plante
     public PlanteNonComestible(string Nom) : base(Nom)
     {
         (
-                    espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
+                    Espece, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissanceBase, besoinEau, zoneEau, besoinLumi,
                     zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, etapeDeVieMax, maturité, estEnvahissante
                 ) = dictAutoAssignement[base.Nom];
     }
