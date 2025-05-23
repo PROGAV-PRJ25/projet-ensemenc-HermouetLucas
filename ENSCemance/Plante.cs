@@ -1,32 +1,54 @@
-public class Plante
+public abstract class Plante
 {
-    private Random rd = new Random();
-    private string nom;
-    private string espece;
-    private bool comestible;
-    private bool mauvaiseHerbe;
-    private string saisonSemis;
-    private string terrainPref;
-    private int espacementMin;
-    private float vitesseCroissance;
-    private float besoinEau;
-    private float zoneEau;
-    private float besoinLumi;
-    private float zoneLumi;
-    private float besoinNutritif;
-    private float zoneNutritif;
-    private float besoinTemp;
-    private float zoneTemp;
-    private float esperenceVie;
+    protected Random rd = new Random(); //m'évitera de devoir
+    public string Nom { get; set; }
+    protected string espece;
+    protected bool mauvaiseHerbe;
+    protected string saisonSemis;
+    protected string terrainPref;
+    protected int espacementMin;
+    protected float vitesseCroissanceBase;
+    protected float vitesseCroissance;
+    protected float besoinEau;
+    protected float zoneEau;
+    protected float besoinLumi;
+    protected float zoneLumi;
+    protected float besoinNutritif;
+    protected float zoneNutritif;
+    protected float besoinTemp;
+    protected float zoneTemp;
+    protected float esperenceVie;
     //en float car on veut pouvoir facilement multiplier par des décimaux
-    private float nbPousse;
-    private bool estVivante;
-    private int CompteurDecomposition;
-    private bool estEnvahissante;
-    private int etapeDeVie;
-    private List<(int, int, int)> OrientationTaillepousse;  //Faire x*t puis y*t
-    private bool estMalade;
-    private List<Maladie> maladies = new List<Maladie>();
+    protected float nbPousse;
+    protected bool estVivante;
+    protected int compteurDecomposition;
+    public int CompteurDecomposition
+    {
+        get
+        {
+            return compteurDecomposition < 0 ? 0 : compteurDecomposition;
+        }
+    }
+    protected int etapeDeVie = 0;
+    public int EtapeDeVie
+    {
+        get
+        {
+            return etapeDeVie;
+        }
+    }
+
+    protected int maturité;
+    public int Maturité
+    {
+        get
+        {
+            return maturité;
+        }
+    }
+    protected int etapeDeVieMax;
+    protected bool estMalade;
+    protected List<Maladie> maladies = new List<Maladie>();
     public List<Maladie> Maladies
     {
         get
@@ -34,20 +56,18 @@ public class Plante
             return maladies;
         }
     }
-    private bool aRamasse = false;
-    private bool estRecolte = false;
-    //private List<Maladie> maladie;
+    protected bool aRamasse = false;
+    protected bool estRecolte = false;
+    //protected List<Maladie> maladie;
 
     public Plante(string Nom)
     {
-        nom = Nom;
-        (
-            espece, comestible, mauvaiseHerbe, saisonSemis, terrainPref, espacementMin, vitesseCroissance, besoinEau, zoneEau, besoinLumi,
-            zoneLumi, besoinNutritif, zoneNutritif, besoinTemp, zoneTemp, esperenceVie, nbPousse, estEnvahissante
-        ) = dictAutoAssignement[Nom];
+        this.Nom = Nom;
+
 
     }
-    public void Tours(float Temp, float Luminosite, float Eau, float Nutrition, int espacement, Maladie maladieChoppe = null, bool traitement = false, string NomTraitement = "")
+    protected void ToursGeneral(float Temp, float Luminosite, float Eau, float Nutrition, int Espacement, string TypeTerrain, //ligne avec les paramètres obligatoires
+    Maladie MaladieChoppe = null, bool Traitement = false, string NomTraitement = "")// ligne avec les paramètres optionnels
     {
         if (estVivante)
         {//vérification de condition
@@ -57,7 +77,7 @@ public class Plante
                 foreach (Maladie maladie in maladies)
                 {
                     maladie.Effet(BesoinEau: ref besoinEau, BesoinLuminosite: ref besoinLumi, BesoinTemp: ref besoinTemp, BesoinNutrition: ref besoinNutritif, EsperenceVie: ref esperenceVie);
-                    if (traitement)
+                    if (Traitement)
                     {
                         estMalade = maladie.Traiter(NomTraitement);
                     }
@@ -68,53 +88,58 @@ public class Plante
             bool respectLumi = besoinLumi - zoneLumi <= Luminosite && Luminosite <= besoinLumi + zoneLumi;
             bool respectEau = besoinEau - zoneEau <= Eau && Eau <= besoinEau + zoneEau;
             bool respectNutrition = besoinNutritif - zoneNutritif <= Nutrition && Nutrition <= besoinNutritif + zoneNutritif;
-            bool respectEspacement = espacement < espacementMin;
+            bool respectEspacement = espacementMin < Espacement;
+            bool respectTypeTerrain = TypeTerrain == terrainPref;
 
-            if (!Object.Equals(maladieChoppe, null))
-            {
-                estMalade = IntrusionMaladie(maladieChoppe);
-            }//on utilise ce tableau pour compter le nombre de condition respecté. Içi on utilise pas la maladie. Ces calculs là seront fait à la fin
-            bool[] tabConds = { respectTemp, respectEau, respectLumi, respectNutrition, respectEspacement };
-            int nbCondRespecter = 0;
-            foreach (bool cond in tabConds)
-            {
-                nbCondRespecter += cond ? 1 : 0;
-            }
-            if (nbCondRespecter < 3)
-            {
-                estVivante = false;
-                CompteurDecomposition = 5;
-            }
-            else
-            {
-                int temp = nbCondRespecter - (tabConds.Length / 2) + 1;
-                float vitesseCroissanceBis = vitesseCroissance * (1 + (1 / temp));
-                if (!Object.Equals(maladieChoppe, null))
-                {
-                    estMalade = estMalade || IntrusionMaladie(maladieChoppe);
-                }
+            //on utilise ce tableau pour compter le nombre de condition respecté. Içi on utilise pas la maladie. Ces calculs là seront fait à la fin
+            bool[] tabConds = { respectTemp, respectEau, respectLumi, respectNutrition, respectEspacement, respectTypeTerrain, estMalade };
+            ModifVitesseCroissance(tabConds, MaladieChoppe);
+            //si la vitesse de croissance est < 1 elle ne grandit pas si elle est inférieur à 0.5:
+            //on augmente de autant que la vitesse de croissance est
+            etapeDeVie += (int)(vitesseCroissance < 1 ? (1 < vitesseCroissance ? Math.Round(vitesseCroissance) : 1) : (vitesseCroissance <= 0.5 ? 0 : 1));
+            //second calcul de mort de la plate: espèrence vie
+            estVivante = !(etapeDeVieMax < etapeDeVie);
+            compteurDecomposition = !estVivante ? 5 : 0;
 
-            }
         }
+        else
+        {
+            compteurDecomposition--;
+        }
+
     }
-    private bool IntrusionMaladie(Maladie maladieChoppe)
+    private bool IntrusionMaladie(Maladie MaladieChoppe)
     {
         double prob = rd.NextDouble();
-        bool testMaladie = (prob <= maladieChoppe.ProbabiliteDLAttraper);
+        bool testMaladie = (prob <= MaladieChoppe.ProbabiliteDLAttraper);
         if (testMaladie)
         {
-            maladies.Add(maladieChoppe);
+            maladies.Add(MaladieChoppe);
         }
         return testMaladie;
 
     }
-    public void ModifEsperanceVie() { return; }
-
-
-    //dictionnaire qui, pour un string contenant le nom de la plante est capable de lui donner tout les attributs de celle ci
-    private static Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)> dictAutoAssignement
-    = new Dictionary<string, (string, bool, bool, string, string, int, float, float, float, float, float, float, float, float, float, float, float, bool)>
+    private void ModifVitesseCroissance(bool[] TabConds, Maladie MaladieChoppe)
     {
-        { "batavia", ("batavius", true, false, "printemp", "sec", 1, 1.85f, 1f, 0f, 3f, 1f, 2f, 1f, 25f, 5f, 4.5f, 2f, false) }
-    };
+        int nbCondRespecter = 0;
+        foreach (bool cond in TabConds)
+        {
+            nbCondRespecter += cond ? 1 : 0;
+        }
+        if (nbCondRespecter < 3)
+        {
+            estVivante = false;
+            compteurDecomposition = 5;
+        }
+        else
+        {
+            int temp = nbCondRespecter - (TabConds.Length / 2) + 1;
+            vitesseCroissance = vitesseCroissanceBase * (1 + (1 / temp));
+            if (!Object.Equals(MaladieChoppe, null))
+            {
+                estMalade = estMalade || IntrusionMaladie(MaladieChoppe);
+            }
+
+        }
+    }
 }
