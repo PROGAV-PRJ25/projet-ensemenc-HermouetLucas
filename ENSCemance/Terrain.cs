@@ -26,7 +26,7 @@ public abstract class Terrain
     protected List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et liste aplatie de plantes
-    protected int taillePotager;
+    public int taillePotager;
     protected List<Plante> potager;
 
     #region Propriétés
@@ -265,24 +265,6 @@ public abstract class Terrain
         return distance;
     }
 
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 2c2c8df6af7aa14fb0e5bc1c3f7ce812719a0e64
-    /// Plante une nouvelle plante à la position (ligne, colonne) si la case est vide.
-
-  
-
-<<<<<<< HEAD
-=======
->>>>>>> 29ea854a292df918e1ac74b10c2974402623da99
->>>>>>> 2f7d1410b1cea194c9ce1e197b123611d20fac6b
->>>>>>> 2c2c8df6af7aa14fb0e5bc1c3f7ce812719a0e64
-    /// Met à jour les états du terrain en fonction de la saison et des plantes.
 
     public abstract void MettreAJourEtat();
 

@@ -171,14 +171,9 @@ public class AffichageTerrain
     };
     public Dictionary<string, List<string>> dictionnaire;
 
-    public AffichageTerrain(int tailleJardin1, List<Terrain> jardin1, int positionCurseur1, int annee1, int mois1, int semaine1)
+    public AffichageTerrain()
     {
-        tailleJardin = tailleJardin1; //récupérer les valeur dans jeu
-        jardin = jardin1;//récupérer les valeur dans jeu
-        positionCurseur = positionCurseur1;//récupérer les valeur dans jeu
-        annee = annee1;
-        mois = mois1;
-        semaine = semaine1;
+
         dictionnaire = new Dictionary<string, List<string>>()
         {
             { "volcanique", volcanique
