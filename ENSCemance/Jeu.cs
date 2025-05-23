@@ -176,7 +176,7 @@ public class Jeu
     private void Semer()
     {
         Console.WriteLine("Choisisser une plante à planter : ");
-        Console.WriteLine(" 1 pour planter une tomate"); // mettre liste des plantes ainsi que leurs caractéristiques/besoin
+        Console.WriteLine(" 1 pour planter une tomate");
         Console.WriteLine(" 2 pour planter un pimment d'espelette");
         Console.WriteLine(" 3 pour planter un pimment de foudre");
         Console.WriteLine(" 4 pour planter un choux géant");
