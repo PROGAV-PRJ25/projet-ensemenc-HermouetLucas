@@ -73,7 +73,7 @@ public class Jeu
     }
 
     public void SelectionnerAction()
-    {
+    { //ajouter une boucle while
         if (dansJardin)
         {
             bool selectionTerrain = false;
@@ -221,79 +221,102 @@ public class Jeu
     private void Semer()
     {
         Console.WriteLine("Choisisser une plante à planter : ");
-        Console.WriteLine(""); // mettre liste des plantes ainsi que leurs caractéristiques/besoin
+        Console.WriteLine(" 1 pour planter une tomate");
+        Console.WriteLine(" 2 pour planter un pimment d'espelette");
+        Console.WriteLine(" 3 pour planter un pimment de foudre");
+        Console.WriteLine(" 4 pour planter un choux géant");
+        Console.WriteLine(" 5 pour planter une goyave");
+        Console.WriteLine(" 6 pour planter une pasteque");
+        Console.WriteLine(" 7 pour planter une citrouille");
+        Console.WriteLine(" 8 pour planter une lumombre");
+        Console.WriteLine(" 9 pour planter un piment givreux");
+        Console.WriteLine(" d pour planter une calyxia");
+        Console.WriteLine(" o pour planter une racine de fer");
+        Console.WriteLine(" t pour revenir en arrière");
+
         bool selectionTerminer = true;
+        Terrain terrainActuel = jardin[positionTerrainSelectionner];
         while (selectionTerminer)
-            string input = Convert.ToString(Console.ReadKey());
-        switch (input)
         {
-            case "1":
+            string input = Convert.ToString(Console.ReadKey());
+            switch (input)
+            {
+                case "1":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("tomate");
+                    selectionTerminer = false;
+                    break;
 
-                selectionTerminer = false;
-                break;
+                case "2":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("pimentEspelette");
+                    selectionTerminer = false;
+                    break;
 
-            case "2":
+                case "3":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("pimentFoudre");
+                    selectionTerminer = false;
 
-                selectionTerminer = false;
+                    break;
 
-                break;
+                case "4":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("chouGeant");
 
-            case "3":
+                    selectionTerminer = false;
+                    break;
 
-                selectionTerminer = false;
+                case "5":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("goyave");
 
-                break;
+                    selectionTerminer = false;
+                    break;
 
-            case "4":
+                case "6":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("pasteque");
 
-                selectionTerminer = false;
-                break;
+                    selectionTerminer = false;
 
-            case "5":
+                    break;
 
-                selectionTerminer = false;
-                break;
+                case "7":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("citrouille");
 
-            case "6":
+                    selectionTerminer = false;
+                    break;
+                case "8":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("lumombre");
 
-                selectionTerminer = false;
+                    selectionTerminer = false;
+                    break;
+                case "9":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("pimentGivreux");
 
-                break;
+                    selectionTerminer = false;
+                    break;
+                case "d":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("calyxia");
 
-            case "7":
+                    selectionTerminer = false;
+                    break;
+                case "o":
+                    terrainActuel.Potager[positionCurseurTerrain] = new PlanteComestible("racineDeFer");
 
-                selectionTerminer = false;
-                break;
-            case "8":
+                    selectionTerminer = false;
+                    break;
+                case "t":
+                    selectionTerminer = false;
+                    break;
 
-                selectionTerminer = false;
-                break;
-            case "9":
-
-                selectionTerminer = false;
-                break;
-            case "10":
-
-                selectionTerminer = false;
-                break;
-            case "11":
-
-                selectionTerminer = false;
-                break;
-            case "12":
-                selectionTerminer = false;
-                break;
-
-            default:
-                Console.WriteLine("Mauvais input");
-                break;
+                default:
+                    Console.WriteLine("Mauvais input");
+                    break;
+            }
         }
+    }
     // private void Recolter() { } pas besoin puisque la récolte est automatique
-        /*
-        private void InstallerSerre() { }
-        private void MettreBarriere() { }
-        private void MettrePareSoleil() { }   On les met ceux là ? Peut-être pas.
-        */
+    /*
+    private void InstallerSerre() { }
+    private void MettreBarriere() { }
+    private void MettrePareSoleil() { }   On les met ceux là ? Peut-être pas.
+    */
     public void PasserSemaine()
     {
         AugmenterNutrition();
