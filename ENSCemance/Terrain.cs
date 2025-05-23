@@ -22,7 +22,7 @@ public abstract class Terrain
     protected string typeTerrain;
 
     // Listes des intrus et maladies possibles sur ce terrain
-    protected List<Intrus> intruPossible;
+    protected List<Intru> intruPossible;
     protected List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et matrice de plantes
@@ -100,7 +100,7 @@ public abstract class Terrain
     /// Dimension dynamique (côté) de la matrice de potager.
     /// Calculée à partir du nombre de lignes dans la liste.
 
-    public int DimensionPotager => (potager.Count) / (potager.Count);
+    public int DimensionPotager => (int)Math.Sqrt(Convert.ToDouble(potager.Count));
 
     #endregion
 
