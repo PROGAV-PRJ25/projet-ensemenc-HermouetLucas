@@ -3,7 +3,7 @@ public abstract class Plante
     protected Random rd = new Random(); //m'évitera de devoir
     public string Nom { get; set; }
     public string Espece { get; set; }
-    protected bool mauvaiseHerbe;
+    public bool mauvaiseHerbe;
     protected string saisonSemis;
     protected string terrainPref;
     protected int espacementMin;

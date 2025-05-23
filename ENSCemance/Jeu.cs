@@ -5,6 +5,9 @@ public class Jeu
     private int annee = 2025;
     private string saison = "hiver";
     private List<Terrain> jardin = [];
+    private bool dansJardin = true;
+    public int positionTerrainSelectionner;
+    public int positionCurseurTerrain;
 
     public void UpdateNouvelleSaison(float indice)
     {
@@ -54,21 +57,99 @@ public class Jeu
         for (int i = 0; i < jardin.Count(); i++)
         {
             Terrain terrainActuel = jardin[i];
-            //terrainActuel.nutrition += terrainActuel.indiceNutrition * 2;
+            terrainActuel.Nutrition += terrainActuel.IndiceNutrition * 2;
         }
     }
-    public void Deserber() { }
+
+    public void SelectionnerAction()
+    {
+        if (dansJardin)
+        {
+            // possibilité de bouger le curseur et de séléctionner un terrain
+        }
+        else
+        {
+            bool selectionTerminer = true;
+            while (selectionTerminer)
+            { //ajouter la possiblilité de déplacement ici aussi
+                Console.WriteLine();
+                Console.WriteLine("Selectionner une action à faire : ");
+                Console.WriteLine(" - Déserber : retire la plante selectionner | appuyer sur d");
+                Console.WriteLine(" - Pailler : augmente légèrement la chaleur de la plante selectionner| appuyer sur p");
+                Console.WriteLine(" - Traiter : retire la maladie de la plante selectionner | appuyer sur t");
+                Console.WriteLine(" - Semer : plante une plante à l'endrois selectionner | appuyer sur s");
+                Console.WriteLine(" - Arroser : arrose la plante à l'endrois selectionner | appuyer sur a");
+                Console.WriteLine(" - Pour revenir sur la liste des terrains | appuyer sur r");
+                Console.WriteLine(" - Pour terminer la semaine | appuyer sur v");
+                string input = Convert.ToString(Console.ReadKey());
+                switch (input)
+                {
+                    case "d":
+                        Deserber();
+                        selectionTerminer = false;
+                        break;
+
+                    case "p":
+                        Pailler();
+                        selectionTerminer = false;
+
+                        break;
+
+                    case "t":
+                        Traiter();
+                        selectionTerminer = false;
+
+                        break;
+
+                    case "s":
+                        Semer();
+                        selectionTerminer = false;
+                        break;
+
+                    case "a":
+                        Arroser();
+                        selectionTerminer = false;
+                        break;
+
+                    case "r":
+                        //pour revenir à liste des terrain
+                        selectionTerminer = false;
+
+                        break;
+
+                    case "v":
+                        PasserSemaine();
+                        selectionTerminer = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Mauvais input");
+                        break;
+
+                }
+
+            }
+        }
+
+    }
+    public void Deserber()
+    {
+        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+
+    }
     private void Pailler() { }
     private void Arroser() { }
     private void Traiter() { }
     private void Semer() { }
-    private void Recolter() { }
+    // private void Recolter() { } pas besoin puisque la récolte est automatique
+    /*
     private void InstallerSerre() { }
     private void MettreBarriere() { }
-    private void MettrePareSoleil() { }
-    public void FaireAction()
+    private void MettrePareSoleil() { }   On les met ceux là ? Peut-être pas.
+    */
+    public void PasserSemaine()
     {
         AugmenterNutrition();
-        UpdateTemps();
+        UpdateTemps(); // il faut faire pousser les plantes ici
     }
 }
