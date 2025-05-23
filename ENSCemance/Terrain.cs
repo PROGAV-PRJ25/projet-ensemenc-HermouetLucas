@@ -2,32 +2,32 @@ using System;
 using System.Collections.Generic;
 
 
-/// Classe abstraite représentant les caractéristiques communes d'un terrain.
+/// Classe représentant les caractéristiques communes d'un terrain.
 
 public class Terrain
 {
     // États du terrain
-    protected float temperature;
-    protected float humidite;
-    protected float luminosite;
-    protected float nutrition;
+    private float temperature;
+    private float humidite;
+    private float luminosite;
+    private float nutrition;
 
     // Indices d'influence
-    protected float indiceTemp;
-    protected float indiceHum;
-    protected float indiceLum;
-    protected float indiceNutrition;
+    private float indiceTemp;
+    private float indiceHum;
+    private float indiceLum;
+    private float indiceNutrition;
 
     // Type de terrain (ex: "Forestier", "Désertique", ...)
     public string terrainType;
 
     // Listes des intrus et maladies possibles sur ce terrain
-    protected List<Intru> intruPossible;
-    protected List<Maladie> maladiePossible;
+    private List<Intru> intruPossible;
+    private List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et liste aplatie de plantes
     public int taillePotager;
-    protected List<Plante> potager;
+    private List<Plante> potager;
 
     #region Propriétés
 
@@ -266,10 +266,10 @@ public class Terrain
     }
 
 
-    public abstract void MettreAJourEtat();
+    public void MettreAJourEtat() { }
 
 
     /// Initialise les listes d'intrus et de maladies possibles pour ce terrain.
 
-    protected abstract void InitialiserEvenements();
+    public void InitialiserEvenements() { }
 }
