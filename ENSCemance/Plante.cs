@@ -82,7 +82,8 @@ public abstract class Plante
                 foreach (Maladie maladie in maladies)
                 {
                     maladie.Effet(BesoinEau: ref besoinEau, BesoinLuminosite: ref besoinLumi, BesoinTemp: ref besoinTemp, BesoinNutrition: ref besoinNutritif, EsperenceVie: ref esperenceVie);
-                    if (Traitement)
+                    if (Traitement)//Traitement: booléen de traitement de la plante
+
                     {
                         estMalade = maladie.Traiter(NomTraitement);
                     }
@@ -104,7 +105,7 @@ public abstract class Plante
             etapeDeVie += (int)(vitesseCroissance < 1 ? (1 < vitesseCroissance ? Math.Round(vitesseCroissance) : 1) : (vitesseCroissance <= 0.5 ? 0 : 1));
             //second calcul de mort de la plate: espèrence vie
             EstVivante = !(etapeDeVieMax < etapeDeVie);
-            compteurDecomposition = !EstVivante ? 5 : 0;
+            compteurDecomposition = 5;
 
         }
         else
