@@ -85,7 +85,7 @@ public class Intru
         }
     }
 
-    private static Dictionary<string, (float, bool)> dictAutoAssignement
+    public static Dictionary<string, (float, bool)> dictAutoAssignement
     = new Dictionary<string, (float, bool)>
     {
         { "Lapin", (0.5f, false) },

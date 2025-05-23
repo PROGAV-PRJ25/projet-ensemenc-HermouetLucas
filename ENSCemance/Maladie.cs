@@ -82,7 +82,7 @@ public class Maladie
         return false;
     } 
 
-    private static Dictionary<string, (float, List<string>)> dictAutoAssignement =
+    public static Dictionary<string, (float, List<string>)> dictAutoAssignement =
     new Dictionary<string, (float, List<string>)>{
         {"Oïdium",(0.15f,new List<string>(){"Round-Up"})},
         {"Mildiou",(0.20f,new List<string>(){"Antibiotique"})},

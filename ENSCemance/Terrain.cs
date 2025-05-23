@@ -22,13 +22,15 @@ public class Terrain
     public string terrainType;
     private bool intruPresent;
     // Listes des intrus et maladies possibles sur ce terrain
-    private List<Intru> intruPossible;
+    private Intru intru;
     private bool estMalade;
-    private List<Maladie> maladiePossible;
+    private Maladie maladie;
 
     // Taille du potager (côté d'un carré) et liste aplatie de plantes
     public int taillePotager;
     private List<Plante> potager;
+
+    private Random rd = new Random();
 
     #region Propriétés
 
@@ -50,6 +52,22 @@ public class Terrain
         get
         {
             return estMalade;
+        }
+    }
+
+    public Intru Intru
+    {
+        get
+        {
+            return Intru;
+        }
+    }
+
+    public Maladie Maladie
+    {
+        get
+        {
+            return maladie;
         }
     }
 
@@ -103,16 +121,6 @@ public class Terrain
         get { return terrainType; }
     }
 
-    public List<Intru> IntruPossible
-    {
-        get { return intruPossible; }
-    }
-
-    public List<Maladie> MaladiePossible
-    {
-        get { return maladiePossible; }
-    }
-
     public int NombreCasesPotager
     {
         get { return potager.Count; }
@@ -137,9 +145,6 @@ public class Terrain
     {
         this.terrainType = terrainType;
         this.taillePotager = taillePotager;
-
-        intruPossible = new List<Intru>();
-        maladiePossible = new List<Maladie>();
 
         // Initialisation du potager (liste aplatie)
         potager = new List<Plante>(taillePotager * taillePotager);
@@ -282,13 +287,48 @@ public class Terrain
     }
 
 
-    public void MettreAJourEtat() { }
+    public void MettreAJourEtat()
+    {
+
+    }
 
 
     /// Initialise les listes d'intrus et de maladies possibles pour ce terrain.
 
     public void InitialiserEvenements()
     {
+        //on récupère tout le dictionnaire des maladie
+        var dicoMaladie = Maladie.dictAutoAssignement;
+        foreach (var maladieList in dicoMaladie)
+        {
+            double prob = rd.NextDouble();
+            var (vTest, temp) = maladieList.Value;
+            bool testMaladie = (prob <= vTest);
+            if (testMaladie)
+            {
+                maladie = new Maladie(maladieList.Key);
+                estMalade = true;
+                break; //Break car on veut avoir qu'une maladie
+            }
+        }
+        //on récupère tout le dictionnaire des maladie
+        var dicoIntru = Intru.dictAutoAssignement;
+        foreach (var intruList in dicoIntru)
+        {
+            double prob = rd.NextDouble();
+            var (vTest, temp) = intruList.Value;
+            bool testMaladie = (prob <= vTest);
+            if (testMaladie)
+            {
+                intru = new Intru(intruList.Key, potager);
+                intruPresent = true;
+                break; //Break car on veut avoir qu'un intru
+            }
+        }
+        if (intruPresent)
+        {
+            intru.Effet();
+        }
 
     }
 }
