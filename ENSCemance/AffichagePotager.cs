@@ -699,7 +699,7 @@ public class AffichagePotager
 
         for (int i = 0; i < this.potager.Count(); i++)
         {
-            emplacement.Add(dictionnaire[this.potager[i].nom]);//permet d'ajouter la liste/image correspondante
+            emplacement.Add(dictionnaire[this.potager[i].Nom]);//permet d'ajouter la liste/image correspondante
         }
     }
     public void AffichageComplet()
@@ -721,19 +721,23 @@ public class AffichagePotager
                     }
                     Dictionary<int, List<string>> planteActuel = emplacement[j + i * this.taillePotager];
                     List<string> etatDeViePlante = planteActuel[this.potager[j + i * this.taillePotager].etapeDeVie];
-                    plante(entier, curseur, etatDeViePlante, couleurApproprie[etatDeViePlante[0]]);
+                    plante(entier, curseur, etatDeViePlante, couleurApproprie[etatDeViePlante[0]], this.potager[j + i * this.taillePotager].Maladies);
                     Console.WriteLine();
                 }
             }
         }
     }
-    public void plante(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur)
+    public void plante(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur, List<Maladie> maladie)
     {
         if (ligne == 0)
         {
             if (curseur)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            }
+            else if (maladie.Count() != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
             Console.Write("┼────────────────────┼");
             Console.ForegroundColor = ConsoleColor.White;
@@ -744,6 +748,10 @@ public class AffichagePotager
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
+            else if (maladie.Count() != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            }
             Console.Write("┼────────────────────┼");
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -753,12 +761,20 @@ public class AffichagePotager
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
+            else if (maladie.Count() != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            }
             Console.Write("|");
             Console.ForegroundColor = couleur; // différent pour chaque terrain
             Console.Write(terrain[ligne]);
             if (curseur)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            }
+            else if (maladie.Count() != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
             else
             {
