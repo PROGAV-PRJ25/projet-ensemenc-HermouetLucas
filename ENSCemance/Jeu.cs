@@ -72,6 +72,7 @@ public class Jeu
         }
     }
 
+    //Permet de déplacer le curseur dans le jardin et de sélectionner un terrain.
     public void SelectionnerAction()
     { //ajouter une boucle while
         if (dansJardin)
@@ -129,6 +130,53 @@ public class Jeu
         }
         else
         {
+
+            // Mode potager : déplacement dans la liste aplatie de plantes
+            bool selectionPotager = false;
+            Terrain terrainActuel = jardin[positionTerrainSelectionner];
+            int dimensionPotager = terrainActuel.DimensionPotager;
+
+            while (!selectionPotager)
+            {
+                Console.Clear();
+                // Affichage du potager (utiliser AffichagePotager)
+                var affichagePotager = new AffichagePotager();
+                affichagePotager.potager = terrainActuel.Potager;
+                affichagePotager.taillePotager = dimensionPotager;
+                affichagePotager.positionCurseur = positionCurseurTerrain;
+                affichagePotager.AffichageComplet();
+
+                var key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (positionCurseurTerrain - dimensionPotager >= 0)
+                            positionCurseurTerrain -= dimensionPotager;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (positionCurseurTerrain + dimensionPotager < terrainActuel.Potager.Count)
+                            positionCurseurTerrain += dimensionPotager;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (positionCurseurTerrain % dimensionPotager > 0)
+                            positionCurseurTerrain -= 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (positionCurseurTerrain % dimensionPotager < dimensionPotager - 1)
+                            positionCurseurTerrain += 1;
+                        break;
+                    case ConsoleKey.Enter:
+                        // ouvrir menu d'actions sur la case sélectionnée
+                        selectionPotager = true;
+                        break;
+                    case ConsoleKey.R:
+                        // revenir au jardin
+                        dansJardin = true;
+                        selectionPotager = true;
+                        break;
+                }
+            }
+
             bool selectionTerminer = true;
             while (selectionTerminer)
             {
@@ -322,5 +370,4 @@ public class Jeu
         AugmenterNutrition();
         UpdateTemps(); // il faut faire pousser les plantes ici et faire en sorte qu'elles ai + soif
     }
-}
 }
