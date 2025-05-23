@@ -59,6 +59,7 @@ public abstract class Plante
         {
             return maladies;
         }
+        set { }
     }
     protected bool aRamasse = false;
     protected bool estRecolte = false;

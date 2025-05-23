@@ -135,21 +135,117 @@ public class Jeu
     public void Deserber()
     {
         Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel.Potager[positionCurseurTerrain] = null; //plante vide
+    }
+    private void Pailler()
+    {
+        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        if (terrainActuel.Potager[positionCurseurTerrain].besoinTemp > 0.2)
+        {
+            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0.2f; //peut être retirer le [0]
+        }
+        else
+        {
+            terrainActuel.Potager[positionCurseurTerrain].besoinTemp -= 0f; //peut être retirer le [0]
+        }
 
     }
-    private void Pailler() { }
-    private void Arroser() { }
-    private void Traiter() { }
-    private void Semer() { }
+    private void Arroser()
+    {
+        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        if (terrainActuel.Potager[positionCurseurTerrain].besoinEau > 0.2)
+        {
+            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0.2f; //peut être retirer le [0]
+        }
+        else
+        {
+            terrainActuel.Potager[positionCurseurTerrain].besoinEau -= 0f; //peut être retirer le [0]
+        }
+    }
+    private void Traiter()
+    {
+        Terrain terrainActuel = jardin[positionTerrainSelectionner];
+        terrainActuel.Potager[positionCurseurTerrain][0].Maladies = [];
+    }
+    private void Semer()
+    {
+        Console.WriteLine("Choisisser une plante à planter : ");
+        Console.WriteLine(""); // mettre liste des plantes ainsi que leurs caractéristiques/besoin
+        bool selectionTerminer = true;
+        while (selectionTerminer)
+            string input = Convert.ToString(Console.ReadKey());
+        switch (input)
+        {
+            case "1":
+
+                selectionTerminer = false;
+                break;
+
+            case "2":
+
+                selectionTerminer = false;
+
+                break;
+
+            case "3":
+
+                selectionTerminer = false;
+
+                break;
+
+            case "4":
+
+                selectionTerminer = false;
+                break;
+
+            case "5":
+
+                selectionTerminer = false;
+                break;
+
+            case "6":
+
+                selectionTerminer = false;
+
+                break;
+
+            case "7":
+
+                selectionTerminer = false;
+                break;
+            case "8":
+
+                selectionTerminer = false;
+                break;
+            case "9":
+
+                selectionTerminer = false;
+                break;
+            case "10":
+
+                selectionTerminer = false;
+                break;
+            case "11":
+
+                selectionTerminer = false;
+                break;
+            case "12":
+                selectionTerminer = false;
+                break;
+
+            default:
+                Console.WriteLine("Mauvais input");
+                break;
+        }
     // private void Recolter() { } pas besoin puisque la récolte est automatique
-    /*
-    private void InstallerSerre() { }
-    private void MettreBarriere() { }
-    private void MettrePareSoleil() { }   On les met ceux là ? Peut-être pas.
-    */
+        /*
+        private void InstallerSerre() { }
+        private void MettreBarriere() { }
+        private void MettrePareSoleil() { }   On les met ceux là ? Peut-être pas.
+        */
     public void PasserSemaine()
     {
         AugmenterNutrition();
-        UpdateTemps(); // il faut faire pousser les plantes ici
+        UpdateTemps(); // il faut faire pousser les plantes ici et faire en sorte qu'elles ai + soif
     }
 }
