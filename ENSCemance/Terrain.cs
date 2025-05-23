@@ -116,7 +116,7 @@ public abstract class Terrain
 
 
     /// Constructeur protégé initialisant tous les attributs selon le type de terrain.
-
+    // on a taille du potager correspond à la taille de la matrice 5*5 ou autres.
     protected Terrain(string terrainType, int taillePotager)
     {
         this.terrainType = terrainType;
