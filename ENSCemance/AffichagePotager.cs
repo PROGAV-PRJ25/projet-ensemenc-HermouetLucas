@@ -677,11 +677,9 @@ public class AffichagePotager
     };
     public Dictionary<string, Dictionary<int, List<string>>> dictionnaire;
 
-    public AffichagePotager(int taillePotager1, List<Plante> potager1, int positionCurseur1)
+    public AffichagePotager()
     {
-        taillePotager = taillePotager1; //récupérer les valeur dans Terrain
-        potager = potager1;//récupérer les valeur dans Terrain
-        positionCurseur = positionCurseur1;//récupérer les valeur dans jeu/Terrain
+
         dictionnaire = new Dictionary<string, Dictionary<int, List<string>>>()
         {
             { "tomate", tomate }, // a compléter avec le reste des trucs

@@ -26,7 +26,7 @@ public abstract class Terrain
     protected List<Maladie> maladiePossible;
 
     // Taille du potager (côté d'un carré) et liste aplatie de plantes
-    protected int taillePotager;
+    public int taillePotager;
     protected List<Plante> potager;
 
     #region Propriétés

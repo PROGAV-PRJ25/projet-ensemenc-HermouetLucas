@@ -14,13 +14,17 @@ public class Jeu
     public bool mode;
 
 
-    // A mettre dans le terrain plutôt ? 
-    // Calcule la dimension (côté) du jardin (carré)
     private int DimensionJardin
     {
         get { return (int)Math.Sqrt(jardin.Count); }
     }
+    public Jeu()
+    {
+        for (int i = 0; i < 64; i++)
+        {
 
+        }
+    }
 
     public void UpdateNouvelleSaison(float indice)
     {
@@ -74,6 +78,7 @@ public class Jeu
         }
     }
 
+    //Permet de déplacer le curseur dans le jardin et de sélectionner un terrain.
     public void SelectionnerAction()
     { //ajouter une boucle while
         if (dansJardin)
@@ -131,9 +136,65 @@ public class Jeu
         }
         else
         {
+
+            // Mode potager : déplacement dans la liste aplatie de plantes
+            bool selectionPotager = false;
+            Terrain terrainActuel = jardin[positionTerrainSelectionner];
+            int dimensionPotager = terrainActuel.DimensionPotager;
+
+            while (!selectionPotager)
+            {
+                Console.Clear();
+                // Affichage du potager (utiliser AffichagePotager)
+                var affichagePotager = new AffichagePotager();
+                affichagePotager.potager = terrainActuel.Potager;
+                affichagePotager.taillePotager = dimensionPotager;
+                affichagePotager.positionCurseur = positionCurseurTerrain;
+                affichagePotager.AffichageComplet();
+
+                var key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (positionCurseurTerrain - dimensionPotager >= 0)
+                            positionCurseurTerrain -= dimensionPotager;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (positionCurseurTerrain + dimensionPotager < terrainActuel.Potager.Count)
+                            positionCurseurTerrain += dimensionPotager;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (positionCurseurTerrain % dimensionPotager > 0)
+                            positionCurseurTerrain -= 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (positionCurseurTerrain % dimensionPotager < dimensionPotager - 1)
+                            positionCurseurTerrain += 1;
+                        break;
+                    case ConsoleKey.Enter:
+                        // ouvrir menu d'actions sur la case sélectionnée
+                        selectionPotager = true;
+                        break;
+                    case ConsoleKey.R:
+                        // revenir au jardin
+                        dansJardin = true;
+                        selectionPotager = true;
+                        break;
+                }
+            }
+
             bool selectionTerminer = true;
             while (selectionTerminer)
             {
+                Console.Clear();
+                Terrain terrainActuel = jardin[positionTerrainSelectionner];
+                // Affichage du potager (utiliser AffichagePotager)
+                var affichage = new AffichagePotager();
+                affichage.potager = terrainActuel.Potager;
+                affichage.taillePotager = terrainActuel.taillePotager;
+                affichage.positionCurseur = positionCurseurTerrain;
+                affichage.AffichageComplet();
+
                 Console.WriteLine();
                 Console.WriteLine("Sélectionner une action à faire : ");
                 Console.WriteLine(" - Désherber : appuyer sur d");
