@@ -210,13 +210,13 @@ public class AffichageTerrain
                         curseur = false;
                     }
                     List<string> terrainActuel = emplacement[j + i * this.tailleJardin];
-                    Terrain(entier, curseur, terrainActuel, couleurApproprie[terrainActuel[0]]);
+                    terrain(entier, curseur, terrainActuel, couleurApproprie[terrainActuel[0]]);
                     Console.WriteLine();
                 }
             }
         }
     }
-    public void Terrain(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur)
+    public void terrain(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur)
     {
         if (ligne == 0)
         {
