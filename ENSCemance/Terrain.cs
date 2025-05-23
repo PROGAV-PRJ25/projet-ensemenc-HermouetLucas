@@ -19,7 +19,7 @@ public abstract class Terrain
     protected float indiceNutrition;
 
     // Type de terrain (ex: "Forestier", "Désertique", ...)
-    protected string typeTerrain;
+    public string typeTerrain;
 
     // Listes des intrus et maladies possibles sur ce terrain
     protected List<Intru> intruPossible;
