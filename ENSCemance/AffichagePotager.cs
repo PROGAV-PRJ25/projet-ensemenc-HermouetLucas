@@ -726,6 +726,21 @@ public class AffichagePotager
                 }
             }
         }
+        Console.Write("Plante : " + this.potager[positionCurseur].Nom);
+
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.Write(" Besoin température : " + this.potager[positionCurseur].besoinTemp);
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write(" Besoin humidité : " + this.potager[positionCurseur].besoinEau);
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write(" Besoin luminosité : " + this.potager[positionCurseur].besoinLumi);
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(" Besoin nutrition : " + this.potager[positionCurseur].besoinNutritif);
+
+        Console.WriteLine();
     }
     public void plante(int ligne, bool curseur, List<string> terrain, ConsoleColor couleur, List<Maladie> maladie)
     {
